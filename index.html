@@ -334,8 +334,61 @@
 <p>消息类型：</p>
 <ul>
 <li>table型</li>
-<li>Number型（较为广泛）</li>
+<li>Number型（使用较多）</li>
 </ul>
+<p>Number类型的消息分为:</p>
+<ul>
+<li>定时器timeout消息(msg.id=rtos.MSG_TIMER=1)</li>
+<li>串口消息(msg.id=rtos.MSG_UART_RXDATA=2)</li>
+<li>键盘消息(msg.id=rtos.MSG_KEYPAD=3)</li>
+<li>中断消息(msg.id=rtos.MSG_INT=4)</li>
+<li>电源管理消息(msg.id=rtos.MSG_PMD=5)</li>
+</ul>
+<p>补充说明：</p>
+<p>串口消息又分为虚拟AT口(msg.uart_id=uart.ATC)和普通串口(msg.uart.id=串口号)</p>
+<p>电源管理消息，当电池在位状态、电池电压百分比、电池电压、充电器在位状态、充电状态任何一个发生变化，就会上报该消息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">状态</th>
+<th style="text-align:center">变量</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">取值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">电池在位状态</td>
+<td style="text-align:center">msg.present</td>
+<td style="text-align:center">boolean</td>
+<td style="text-align:center">true or false</td>
+</tr>
+<tr>
+<td style="text-align:center">电压百分比</td>
+<td style="text-align:center">msg.level</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">0-100</td>
+</tr>
+<tr>
+<td style="text-align:center">电池电压</td>
+<td style="text-align:center">msg.voltage</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">充电器在位状态</td>
+<td style="text-align:center">msg.charge</td>
+<td style="text-align:center">boolean</td>
+<td style="text-align:center">true or false</td>
+</tr>
+<tr>
+<td style="text-align:center">充电器状态</td>
+<td style="text-align:center">msg.state</td>
+<td style="text-align:center">number</td>
+<td style="text-align:center">0-不在充电 1-充电中 2-充电停止</td>
+</tr>
+</tbody>
+</table>
 
           
         
