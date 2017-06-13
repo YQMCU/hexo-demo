@@ -495,12 +495,8 @@
 <h3 id="1-5-程序注册"><a href="#1-5-程序注册" class="headerlink" title="1.5 程序注册"></a>1.5 程序注册</h3><p>使用相关程序做各种处理的时候，需要先将程序注册下，否则无法使用。</p>
 <p>这样做的好处是可以<strong>将同类型程序集中放置在一个表中，方便管理和修改</strong>。</p>
 <p>除了以上提及<code>regmsg()</code>外，还有regurc()，regapp()，regnotify()，reguart()。</p>
-<p>1) regmsg()用来注册相应的消息处理程序</p>
-<p>regmsg()位于<code>sys.lua</code>库文件中。luat主架构中的sys.run()目前能够处理的消息中，除了定时器消息（定时器函数直接用sys.timer_start来启动）和物理串口消息（用reguart来注册）外，其余内部消息，例如AT命令的虚拟串口数据接收消息、音频消息、充电管理消息、按键消息等，均需要用regmsg注册相应的消息处理函数。</p>
-<ul>
-<li>串口消息</li>
-</ul>
-<p>又分为虚拟AT口(msg.uart_id=uart.ATC)和物理串口(msg.uart_id=串口号)消息。</p>
+<h4 id="1-regmsg-用来注册相应的消息处理程序"><a href="#1-regmsg-用来注册相应的消息处理程序" class="headerlink" title="1) regmsg()用来注册相应的消息处理程序"></a>1) regmsg()用来注册相应的消息处理程序</h4><p>regmsg()位于<code>sys.lua</code>库文件中。luat主架构中的sys.run()目前能够处理的消息中，除了定时器消息（定时器函数直接用sys.timer_start来启动）和物理串口消息（用reguart来注册）外，其余内部消息，例如AT命令的虚拟串口数据接收消息、音频消息、充电管理消息、按键消息等，均需要用regmsg注册相应的消息处理函数。</p>
+<h5 id="a-串口消息"><a href="#a-串口消息" class="headerlink" title="a. 串口消息"></a>a. 串口消息</h5><p>又分为虚拟AT口(msg.uart_id=uart.ATC)和物理串口(msg.uart_id=串口号)消息。</p>
 <p>其中虚拟AT口的消息已经缺省注册了，不需要用户再注册；<br><strong>物理串口消息处理函数使用前需要用reguart注册</strong>。</p>
 
           
