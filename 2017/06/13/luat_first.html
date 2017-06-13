@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/13/luat_first.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
 <meta property="og:description" content="Lua模块应用程序开发架构各个功能在各个module中处理，官方称之为库函数(lib)。自开发用户需要自己创建一个main.lua主程序，运行也是从main开始的。main.lua是一个入口文件，且只能存在一个main.lua。 脚本在sys.run()中循环运行。 所以，sys模块的run()是主架构，这个主架构是用消息机制实现的。用户拿到这个架构可以根据自己的需求增加或修改对应的消息处理程序即">
-<meta property="og:updated_time" content="2017-06-13T08:08:34.006Z">
+<meta property="og:updated_time" content="2017-06-13T08:14:14.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="luat first">
 <meta name="twitter:description" content="Lua模块应用程序开发架构各个功能在各个module中处理，官方称之为库函数(lib)。自开发用户需要自己创建一个main.lua主程序，运行也是从main开始的。main.lua是一个入口文件，且只能存在一个main.lua。 脚本在sys.run()中循环运行。 所以，sys模块的run()是主架构，这个主架构是用消息机制实现的。用户拿到这个架构可以根据自己的需求增加或修改对应的消息处理程序即">
@@ -493,8 +493,18 @@
 <p>除了以上提及<code>regmsg()</code>外，还有regurc()，regapp()，regnotify()，reguart()。</p>
 <h4 id="regmsg-用来注册相应的消息处理程序"><a href="#regmsg-用来注册相应的消息处理程序" class="headerlink" title="regmsg()用来注册相应的消息处理程序"></a>regmsg()用来注册相应的消息处理程序</h4><p>regmsg()位于<code>sys.lua</code>库文件中。luat主架构中的sys.run()目前能够处理的消息中，除了定时器消息（定时器函数直接用sys.timer_start来启动）和物理串口消息（用reguart来注册）外，其余内部消息，例如AT命令的虚拟串口数据接收消息、音频消息、充电管理消息、按键消息等，均需要用regmsg注册相应的消息处理函数。</p>
 <ul>
-<li>串口消息<br>又分为虚拟AT口(msg.uart_id=uart.ATC)和物理串口(msg.uart_id=串口号)消息。<br>其中虚拟AT口的消息已经缺省注册了，不需要用户再注册；<br><strong>物理串口消息处理函数使用前需要用reguart注册</strong>。</li>
+<li><p>串口消息<br>又分为虚拟AT口(msg.uart_id=uart.ATC)和物理串口(msg.uart_id=串口号)消息。<br>其中虚拟AT口的消息已经缺省注册了，不需要用户再注册；<br><strong>物理串口消息处理函数使用前需要用reguart注册</strong>。</p>
+</li>
+<li><p>键盘消息<br>msg.id=rtos.MSG_KEYPAD=3<br>需要用regmsg()来注册处理函数</p>
+</li>
+<li><p>中断消息<br>msg.id=rtos.MSG_INT=4<br>需要用regmsg()来注册处理函数</p>
+</li>
+<li><p>电源管理消息<br>msg.id=rtos.MSG_PMD=5<br>需要用regmsg()来注册处理函数</p>
+</li>
+<li><p>音频消息<br>msg.id=rtos.MSG_AUDIO<br>需要用regmsg()来注册处理函数</p>
+</li>
 </ul>
+<p>regmsg()函数<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">regmsg</span><span class="params">(id,handler)</span></span></div><div class="line">	handlers[id] = handler</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
