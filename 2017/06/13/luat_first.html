@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/13/luat_first.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
 <meta property="og:description" content="Lua模块应用程序开发架构各个功能在各个module中处理，官方称之为库函数(lib)。自开发用户需要自己创建一个main.lua主程序，运行也是从main开始的。main.lua是一个入口文件，且只能存在一个main.lua。 脚本在sys.run()中循环运行。 所以，sys模块的run()是主架构，这个主架构是用消息机制实现的。用户拿到这个架构可以根据自己的需求增加或修改对应的消息处理程序即">
-<meta property="og:updated_time" content="2017-06-13T08:46:47.029Z">
+<meta property="og:updated_time" content="2017-06-13T09:04:24.961Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="luat first">
 <meta name="twitter:description" content="Lua模块应用程序开发架构各个功能在各个module中处理，官方称之为库函数(lib)。自开发用户需要自己创建一个main.lua主程序，运行也是从main开始的。main.lua是一个入口文件，且只能存在一个main.lua。 脚本在sys.run()中循环运行。 所以，sys模块的run()是主架构，这个主架构是用消息机制实现的。用户拿到这个架构可以根据自己的需求增加或修改对应的消息处理程序即">
@@ -517,9 +517,22 @@
 <p>step1: GPIO中断处理程序<br>假设gsensor连接的是GPIO5<br>机械式震动传感器连接的是GPIO3<br>GPS连接的是GPIO1<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">IO.gsensor = pio.P0_5</div><div class="line">IO.shake = pio.P0_3</div><div class="line">IO.gps = pio.P0_1</div><div class="line"></div><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">gpio_init</span><span class="params">(msg)</span></span></div><div class="line">	<span class="comment">--产生下降沿中断</span></div><div class="line">	<span class="keyword">if</span> msg.int_id == cpu.INT_GPIO_NEGEDGE <span class="keyword">then</span></div><div class="line">		<span class="comment">--如果产生的中断的GPIO是gsensor引脚</span></div><div class="line">		<span class="keyword">if</span> msg.int_resnum == IO.gsensor <span class="keyword">then</span></div><div class="line">			<span class="comment">--gsensor处理程序</span></div><div class="line">		<span class="keyword">elseif</span> msg.int_resnum == IO.shake <span class="keyword">then</span></div><div class="line">		  <span class="comment">--震动传感器处理程序</span></div><div class="line">		<span class="keyword">elseif</span> msg.int_resnum == IO.gps <span class="keyword">then</span></div><div class="line">			<span class="comment">--gps处理程序</span></div><div class="line">		<span class="keyword">end</span></div><div class="line">	<span class="keyword">elseif</span> msg.int_id == cpu.INT_GPIO_POSEDGE <span class="keyword">then</span></div><div class="line">			<span class="comment">--处理上升沿终端程序</span></div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
 <p>step2: 注册该处理程序<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sys.regmsg(rtos.MSG_INT,gpio_init)</div></pre></td></tr></table></figure></p>
 <p>例3: 在应用模块中加入PMD(电源管理)消息处理程序</p>
-<p>step1: 电源管理消息处理程序<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">BatManage</span><span class="params">(msg)</span></span></div><div class="line">	<span class="built_in">print</span>(<span class="string">"msg.voltage,msg.charger,msg.state = "</span>,msg.voltage,msg.charger,msg.state)</div><div class="line">	DealCharger(msg)</div><div class="line">	DealVolt(msg)</div></pre></td></tr></table></figure></p>
+<p>step1: 电源管理消息处理程序<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">BatManage</span><span class="params">(msg)</span></span></div><div class="line">	<span class="built_in">print</span>(<span class="string">"msg.voltage,msg.charger,msg.state = "</span>,msg.voltage,msg.charger,msg.state)</div><div class="line">	DealCharger(msg)</div><div class="line">	DealVolt(msg)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
 <p>step2: 注册该处理程序<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sys.regmsg(rtos.MSG_PMD,BatManage)</div></pre></td></tr></table></figure></p>
-<h4 id="regapp-用来注册应用程序"><a href="#regapp-用来注册应用程序" class="headerlink" title="regapp()用来注册应用程序"></a>regapp()用来注册应用程序</h4>
+<h4 id="regapp-用来注册应用程序"><a href="#regapp-用来注册应用程序" class="headerlink" title="regapp()用来注册应用程序"></a>regapp()用来注册应用程序</h4><p>对AT命令的查询结果或者某些事件的处理结果，会以dispatch(消息id,参数1,参数2,…)的形式来通知，如果想在app中对该消息id及对应的参数(参数1,参数2,…)进行进一步处理，需要事先以regapp方式注册该app程序，注册后，每次dispatch相应的消息id，就自动会进入相应的app程序对dispatch出来的消息id和参数进行处理。</p>
+<p>regapp的详细流程如下：</p>
+<p>1) 在脚本某处执行regapp()，即dispatch(“SYS_ADD_APP”,app)</p>
+<p>2) dispatch函数将(“SYS_ADD_APP”,app)插入表qmsg尾部</p>
+<p>3) 在下一轮的run()中，执行runqmsg()-&gt;getmsg()，获取到(“SYS_ADD_APP”,app)</p>
+<p>4) 执行callapp(“SYS_ADD_APP”,app)，将app这个回调函数的地址指针放到apps这个表的尾部</p>
+<p><strong>regapp有2种注册方式:</strong></p>
+<p>a) 以表的形式来注册<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> <span class="built_in">table</span> = &#123;消息id1 = app1,消息id2 = app2,...,消息idn = appn&#125;</div><div class="line"></div><div class="line">sys.regapp(<span class="built_in">table</span>)</div></pre></td></tr></table></figure></p>
+<p>这种以表的方式注册app程序，一次可以注册多个app</p>
+<p>使用方法举例：</p>
+<p><strong>例: 注册多个dispatch消息处理程序</strong></p>
+<p>step1: 填写注册表<br>在本例中，长按键消息(MMI_KEYPAD_LPRESS)和短按键消息(MMI_KEYPAD_SPRESS)由客户编写用程序dispatch出来；<br>通话相关的消息(CALL_CONNECTED,CALL_DISCONNECTED,CALL_INCOMING)由库文件<code>cc.lua</code>dipatch出来</p>
+<p>b) </p>
+
       
     </div>
 
