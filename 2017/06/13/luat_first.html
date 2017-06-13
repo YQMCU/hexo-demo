@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/13/luat_first.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
 <meta property="og:description" content="1 Lua模块应用程序开发架构各个功能在各个module中处理，官方称之为库函数(lib)。自开发用户需要自己创建一个main.lua主程序，运行也是从main开始的。main.lua是一个入口文件，且只能存在一个main.lua。 脚本在sys.run()中循环运行。 所以，sys模块的run()是主架构，这个主架构是用消息机制实现的。用户拿到这个架构可以根据自己的需求增加或修改对应的消息处理程">
-<meta property="og:updated_time" content="2017-06-13T06:02:48.336Z">
+<meta property="og:updated_time" content="2017-06-13T07:49:54.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="luat first">
 <meta name="twitter:description" content="1 Lua模块应用程序开发架构各个功能在各个module中处理，官方称之为库函数(lib)。自开发用户需要自己创建一个main.lua主程序，运行也是从main开始的。main.lua是一个入口文件，且只能存在一个main.lua。 脚本在sys.run()中循环运行。 所以，sys模块的run()是主架构，这个主架构是用消息机制实现的。用户拿到这个架构可以根据自己的需求增加或修改对应的消息处理程">
@@ -391,6 +391,106 @@
 <p>2) 各个消息处理程序使用前需要用regmsg程序注册到handlers表中(除了定时器timeout消息和物理串口消息以外)，这样代码改动影响面小，当业务流程有修改的时候，只需要修改具体的消息处理程序的内容即可。</p>
 <p>3) run()流程详细介绍</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span></div><div class="line">	<span class="keyword">local</span> msg,v1,v2,v3,v4</div><div class="line"></div><div class="line">	<span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></div><div class="line">		<span class="comment">--处理内部消息</span></div><div class="line">		runqmsg()</div><div class="line">		<span class="comment">--阻塞读取外部消息</span></div><div class="line">		msg,v1,v2,v3,v4 = rtos.receive(rtos.INF_TIMEOUT)</div><div class="line">		<span class="keyword">if</span> msg <span class="keyword">then</span> watchdog.kick() <span class="keyword">end</span></div><div class="line"></div><div class="line">		<span class="comment">--电池电量为0%，用户应用脚本中没有定义“低电关机处理程序”，并且没有启动自动关机定时器		</span></div><div class="line">		<span class="keyword">if</span> <span class="keyword">not</span> lprfun <span class="keyword">and</span> <span class="keyword">not</span> lpring <span class="keyword">and</span> <span class="built_in">type</span>(msg) == <span class="string">"table"</span> <span class="keyword">and</span> msg.id == rtos.MSG_PMD <span class="keyword">and</span> msg.level == <span class="number">0</span> <span class="keyword">then</span></div><div class="line">			<span class="comment">--启动自动关机定时器，60秒后关机</span></div><div class="line">			lpring = <span class="literal">true</span></div><div class="line">			timer_start(poweroff,<span class="number">60000</span>,<span class="string">"r1"</span>)</div><div class="line">		<span class="keyword">end</span></div><div class="line">		</div><div class="line">		<span class="comment">--外部消息为table类型</span></div><div class="line">		<span class="keyword">if</span> <span class="built_in">type</span>(msg) == <span class="string">"table"</span> <span class="keyword">then</span></div><div class="line">			<span class="comment">--定时器类型消息</span></div><div class="line">			<span class="keyword">if</span> msg.id == rtos.MSG_TIMER <span class="keyword">then</span></div><div class="line">				timerfnc(msg.timer_id)</div><div class="line">			<span class="comment">--AT命令的虚拟串口数据接收消息</span></div><div class="line">			<span class="keyword">elseif</span> msg.id == rtos.MSG_UART_RXDATA <span class="keyword">and</span> msg.uart_id == uart.ATC <span class="keyword">then</span></div><div class="line">				handlers.atc()</div><div class="line">			<span class="keyword">else</span></div><div class="line">				<span class="comment">--物理串口数据接收消息</span></div><div class="line">				<span class="keyword">if</span> msg.id == rtos.MSG_UART_RXDATA <span class="keyword">then</span></div><div class="line">					<span class="keyword">if</span> uartprocs[msg.uart_id] ~= <span class="literal">nil</span> <span class="keyword">then</span></div><div class="line">						uartprocs[msg.uart_id]()</div><div class="line">					<span class="keyword">else</span></div><div class="line">						handlers[msg.id](msg)</div><div class="line">					<span class="keyword">end</span></div><div class="line">				<span class="comment">--其他消息（音频消息、充电管理消息、按键消息等）</span></div><div class="line">				<span class="keyword">else</span></div><div class="line">					handlers[msg.id](msg)</div><div class="line">				<span class="keyword">end</span></div><div class="line">			<span class="keyword">end</span></div><div class="line">		<span class="comment">--外部消息非table类型</span></div><div class="line">		<span class="keyword">elseif</span> <span class="built_in">type</span>(msg) == <span class="string">"number"</span> <span class="keyword">then</span></div><div class="line">			<span class="comment">--定时器类型消息</span></div><div class="line">			<span class="keyword">if</span> msg == rtos.MSG_TIMER <span class="keyword">then</span></div><div class="line">				timerfnc(v1)</div><div class="line">			<span class="keyword">elseif</span> msg == rtos.MSG_ALARM <span class="keyword">then</span></div><div class="line">				<span class="comment">--print("ZHY rtos.MSG_ALARM",msg,rtos.MSG_ALARM,type(msg))</span></div><div class="line">				handlers[msg](msg)</div><div class="line">			<span class="keyword">elseif</span> msg == rtos.MSG_UART_RXDATA <span class="keyword">then</span></div><div class="line">				<span class="comment">--AT命令的虚拟串口</span></div><div class="line">				<span class="keyword">if</span> v1 == uart.ATC <span class="keyword">then</span></div><div class="line">					handlers.atc()</div><div class="line">				<span class="comment">--物理串口</span></div><div class="line">				<span class="keyword">else</span></div><div class="line">					<span class="keyword">if</span> uartprocs[v1] ~= <span class="literal">nil</span> <span class="keyword">then</span></div><div class="line">						uartprocs[v1]()</div><div class="line">					<span class="keyword">else</span></div><div class="line">						handlers[msg](msg,v1)</div><div class="line">					<span class="keyword">end</span></div><div class="line">				<span class="keyword">end</span></div><div class="line">			<span class="keyword">elseif</span> msg &gt;= rtos.MSG_PDP_ACT_CNF <span class="keyword">and</span> msg &lt;= rtos.MSG_SOCK_CLOSE_IND <span class="keyword">then</span></div><div class="line">				handlers.sock(msg,v1,v2,v3,v4)</div><div class="line">			<span class="keyword">else</span></div><div class="line">				<span class="keyword">if</span> handlers[msg] <span class="keyword">then</span></div><div class="line">					handlers[msg](v1,v2,v3,v4)</div><div class="line">				<span class="keyword">end</span></div><div class="line">			<span class="keyword">end</span></div><div class="line">		<span class="keyword">end</span></div><div class="line">		<span class="comment">--打印lua脚本程序占用的内存，单位是K字节</span></div><div class="line">		<span class="comment">--print("mem:",base.collectgarbage("count"))</span></div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>在<code>ril.lua</code>中已经用sys.regmsg(“atc”,atcreader)把ATC口的处理程序注册好了。</p>
+<p>如果需要使用电源管理，可以单独写个应用模块，比如取名为power.lua，并在里面注册rtos.MSG_PMD消息处理程序。</p>
+<p>如果需要GPIO中断，单独写应用模块，并在里面注册rtos.MSG_INT消息的处理程序，并定义相应的处理程序。</p>
+<h3 id="1-3-lib中的各个模块"><a href="#1-3-lib中的各个模块" class="headerlink" title="1.3 lib中的各个模块"></a>1.3 lib中的各个模块</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">文件名</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">sys.lua</td>
+<td style="text-align:center">系统模块，核心模块，里面有常用的系统功能</td>
+</tr>
+<tr>
+<td style="text-align:center">ril.lua</td>
+<td style="text-align:center">处理AT命令的核心模块</td>
+</tr>
+<tr>
+<td style="text-align:center">sms.lua</td>
+<td style="text-align:center">处理短信命令的模块</td>
+</tr>
+<tr>
+<td style="text-align:center">link.lua</td>
+<td style="text-align:center">处理IP链路和数据收发命令的模块</td>
+</tr>
+<tr>
+<td style="text-align:center">cc.lua</td>
+<td style="text-align:center">处理呼叫控制命令的模块</td>
+</tr>
+<tr>
+<td style="text-align:center">audio.lua</td>
+<td style="text-align:center">处理音频相关的命令的模块</td>
+</tr>
+<tr>
+<td style="text-align:center">pm.lua</td>
+<td style="text-align:center">处理休眠和唤醒相关的命令的模块</td>
+</tr>
+<tr>
+<td style="text-align:center">pb.lua</td>
+<td style="text-align:center">处理电话本相关的命令的模块</td>
+</tr>
+<tr>
+<td style="text-align:center">net.lua</td>
+<td style="text-align:center">处理网络相关的命令的模块</td>
+</tr>
+<tr>
+<td style="text-align:center">update.lua</td>
+<td style="text-align:center">处理脚本升级功能的模块</td>
+</tr>
+<tr>
+<td style="text-align:center">common.lua</td>
+<td style="text-align:center">一些经常用到的通用程序</td>
+</tr>
+<tr>
+<td style="text-align:center">misc.lua</td>
+<td style="text-align:center">一些时间处理函数和常用AT命令的处理</td>
+</tr>
+<tr>
+<td style="text-align:center">gps.lua</td>
+<td style="text-align:center">GPS相关的库函数</td>
+</tr>
+<tr>
+<td style="text-align:center">agps.lua</td>
+<td style="text-align:center">agps相关的库函数</td>
+</tr>
+<tr>
+<td style="text-align:center">fly.lua</td>
+<td style="text-align:center">飞行模式相关的库函数</td>
+</tr>
+<tr>
+<td style="text-align:center">bluetooth.lua</td>
+<td style="text-align:center">蓝牙相关的库函数</td>
+</tr>
+<tr>
+<td style="text-align:center">dbg.lua</td>
+<td style="text-align:center">模块的错误调试信息相关的库函数</td>
+</tr>
+<tr>
+<td style="text-align:center">maths.lua</td>
+<td style="text-align:center">平方根函数</td>
+</tr>
+<tr>
+<td style="text-align:center">patch.lua</td>
+<td style="text-align:center">Lua源码功能中的补丁</td>
+</tr>
+<tr>
+<td style="text-align:center">mqtt.lua</td>
+<td style="text-align:center">mqtt协议管理模块</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-5-模块的调用关系"><a href="#1-5-模块的调用关系" class="headerlink" title="1.5 模块的调用关系"></a>1.5 模块的调用关系</h3><p>1) 需要使用这些模块的时候，只需要在调用模块中require加载该模块即可。</p>
+<p>2) 调用模块可以是main.lua，也可以是各个分模块。但是被调用模块不可以是main.lua。</p>
+<p>3) 在被调用模块加载后，可以在调用模块中使用被调模块的全局变量和全局程序。</p>
+<p>4) 不可以循环require。比如以下是错误的。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- a.lua</span></div><div class="line"><span class="built_in">require</span>(<span class="string">"b"</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- b.lua</span></div><div class="line"><span class="built_in">require</span>(<span class="string">"c"</span>)</div></pre></td></tr></table></figure>
+<p>以下c.lua程序是错误的<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- c.lua</span></div><div class="line"><span class="comment">-- 循环请求错误 </span></div><div class="line"><span class="built_in">require</span>(<span class="string">"a"</span>)</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -567,7 +667,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Lua模块应用程序开发架构"><span class="nav-number">1.</span> <span class="nav-text">1 Lua模块应用程序开发架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-main-lua-主程序"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 main.lua 主程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-run-详解"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 run()详解</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Lua模块应用程序开发架构"><span class="nav-number">1.</span> <span class="nav-text">1 Lua模块应用程序开发架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-main-lua-主程序"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 main.lua 主程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-run-详解"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 run()详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-lib中的各个模块"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 lib中的各个模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-模块的调用关系"><span class="nav-number">1.4.</span> <span class="nav-text">1.5 模块的调用关系</span></a></li></ol></li></ol></div>
             
 
           </div>
