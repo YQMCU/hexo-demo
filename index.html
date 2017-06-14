@@ -254,6 +254,117 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/14/wps-max-label-macro.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="缘起花渊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YQMCU's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/14/wps-max-label-macro.html" itemprop="url">wps_max_label_macro</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-14T14:26:28+08:00">
+                2017-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="批量修改B2到Q4064的样式批量格式刷"><a href="#批量修改B2到Q4064的样式批量格式刷" class="headerlink" title="批量修改B2到Q4064的样式批量格式刷"></a>批量修改B2到Q4064的样式批量格式刷</h2><figure class="highlight vb"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Sub</span> 标注最值()</div><div class="line"><span class="comment">'</span></div><div class="line"><span class="comment">' 标注最值 Macro</span></div><div class="line"><span class="comment">' 宏由 Administrator 录制，时间: 2017/06/14</span></div><div class="line"><span class="comment">'</span></div><div class="line"></div><div class="line"><span class="comment">'</span></div><div class="line"><span class="comment">'    Range("B2:Q2").Select</span></div><div class="line"><span class="comment">'    Selection.copy</span></div><div class="line"><span class="comment">'    Range("B3:Q3").Select</span></div><div class="line"><span class="comment">'    Selection.PasteSpecial Paste:=xlPasteFormats, Operation:=xlPasteSpecialOperationNone, SkipBlanks:=False, Transpose:=False</span></div><div class="line"><span class="comment">'    Application.CutCopyMode = False</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">'copy(2,3)</span></div><div class="line"><span class="comment">'copy(2,3)</span></div><div class="line"></div><div class="line">  <span class="keyword">For</span> i = <span class="number">2</span> <span class="keyword">To</span> <span class="number">4063</span></div><div class="line">     Range(<span class="string">"B"</span> &amp; <span class="built_in">CStr</span>(i) &amp; <span class="string">":Q"</span> &amp; <span class="built_in">CStr</span>(i)).<span class="keyword">Select</span></div><div class="line">     Selection.copy</div><div class="line">     Range(<span class="string">"B"</span> &amp; <span class="built_in">CStr</span>(i + <span class="number">1</span>) &amp; <span class="string">":Q"</span> &amp; <span class="built_in">CStr</span>(i + <span class="number">1</span>)).<span class="keyword">Select</span></div><div class="line">     Selection.PasteSpecial Paste:=xlPasteFormats, Operation:=xlPasteSpecialOperationNone, SkipBlanks:=<span class="literal">False</span>, Transpose:=<span class="literal">False</span></div><div class="line">     Application.CutCopyMode = <span class="literal">False</span></div><div class="line">  <span class="keyword">Next</span> i</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/luat_first.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -757,7 +868,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -770,7 +881,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
