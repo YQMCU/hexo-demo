@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="网络,物联网,通讯," />
 
 
 
@@ -93,12 +93,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="YQMCU&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/wps/index.html">
+<meta name="description" content="协议初解MQTT整体上协议可以拆分为： 固定头部+可变头部+消息体。 协议说白了就是对于对方通信的一个约定，比如传过来一个字符流，第1个字节表示什么，第2个字节表示什么诸如此类的约定。 固定头部的构造如下：|bit|7|6|5|4|3|2|1|0||:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:||byte 1|Message Type|">
+<meta name="keywords" content="网络,物联网,通讯">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MQTT折腾记录(2) -- MQTT协议详解">
+<meta property="og:url" content="http://yoursite.com/2017/06/19/mqtt-study-2.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
+<meta property="og:description" content="协议初解MQTT整体上协议可以拆分为： 固定头部+可变头部+消息体。 协议说白了就是对于对方通信的一个约定，比如传过来一个字符流，第1个字节表示什么，第2个字节表示什么诸如此类的约定。 固定头部的构造如下：|bit|7|6|5|4|3|2|1|0||:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:||byte 1|Message Type|">
+<meta property="og:updated_time" content="2017-06-19T05:43:22.221Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YQMCU&#39;s Blog">
+<meta name="twitter:title" content="MQTT折腾记录(2) -- MQTT协议详解">
+<meta name="twitter:description" content="协议初解MQTT整体上协议可以拆分为： 固定头部+可变头部+消息体。 协议说白了就是对于对方通信的一个约定，比如传过来一个字符流，第1个字节表示什么，第2个字节表示什么诸如此类的约定。 固定头部的构造如下：|bit|7|6|5|4|3|2|1|0||:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:||byte 1|Message Type|">
 
 
 
@@ -126,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/wps/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/19/mqtt-study-2.html"/>
 
 
 
 
 
-  <title>标签: wps | YQMCU's Blog</title>
+  <title>MQTT折腾记录(2) -- MQTT协议详解 | YQMCU's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -158,7 +163,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -242,44 +247,154 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h1>wps<small>标签</small>
-      </h1>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/19/mqtt-study-2.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="缘起花渊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YQMCU's Blog">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MQTT折腾记录(2) -- MQTT协议详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T12:43:54+08:00">
+                2017-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h2 id="协议初解"><a href="#协议初解" class="headerlink" title="协议初解"></a>协议初解</h2><p>MQTT整体上协议可以拆分为： 固定头部+可变头部+消息体。</p>
+<p>协议说白了就是对于对方通信的一个约定，比如传过来一个字符流，第1个字节表示什么，第2个字节表示什么诸如此类的约定。</p>
+<p>固定头部的构造如下：<br>|bit|7|6|5|4|3|2|1|0|<br>|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|<br>|byte 1|Message Type|</p>
 
-      <h2 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/06/14/wps-max-label-macro.html" itemprop="url">
-              
-                <span itemprop="name">wps最值标注批量格式刷程序</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-14T14:26:28+08:00"
-              content="2017-06-14" >
-          06-14
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络/" rel="tag"># 网络</a>
+          
+            <a href="/tags/物联网/" rel="tag"># 物联网</a>
+          
+            <a href="/tags/通讯/" rel="tag"># 通讯</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/19/android-mobile-as-pc-sound.html" rel="next" title="用安卓手机作为电脑的播放器">
+                <i class="fa fa-chevron-left"></i> 用安卓手机作为电脑的播放器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -287,6 +402,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -306,8 +425,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -360,6 +488,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#协议初解"><span class="nav-number">1.</span> <span class="nav-text">协议初解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -473,10 +617,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-  
+
 
   
 
