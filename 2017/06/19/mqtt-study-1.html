@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="网络,物联网,通讯," />
+  <meta name="keywords" content="物联网,网络,通讯," />
 
 
 
@@ -94,13 +94,13 @@
 
 
 <meta name="description" content="MQTT(Message Queuing Telemetry Transport,消息队列遥测传输协议)，是一种基于发布/订阅(publish/subscribe)模式的轻量级通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。 MQTT最大的优点在于，可以以极少的代码和优先的带宽，为连接远程设备提供实时可靠的消息服务。 作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型">
-<meta name="keywords" content="网络,物联网,通讯">
+<meta name="keywords" content="物联网,网络,通讯">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MQTT折腾记录(1)">
 <meta property="og:url" content="http://yoursite.com/2017/06/19/mqtt-study-1.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
 <meta property="og:description" content="MQTT(Message Queuing Telemetry Transport,消息队列遥测传输协议)，是一种基于发布/订阅(publish/subscribe)模式的轻量级通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。 MQTT最大的优点在于，可以以极少的代码和优先的带宽，为连接远程设备提供实时可靠的消息服务。 作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型">
-<meta property="og:updated_time" content="2017-06-19T03:47:10.915Z">
+<meta property="og:updated_time" content="2017-06-19T03:48:50.909Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MQTT折腾记录(1)">
 <meta name="twitter:description" content="MQTT(Message Queuing Telemetry Transport,消息队列遥测传输协议)，是一种基于发布/订阅(publish/subscribe)模式的轻量级通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。 MQTT最大的优点在于，可以以极少的代码和优先的带宽，为连接远程设备提供实时可靠的消息服务。 作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型">
@@ -361,16 +361,18 @@
 <li>处理来自客户端的订阅和退订请求</li>
 <li>向订阅的客户转发应用程序消息</li>
 </ul>
-<h3 id="MQTT协议中的订阅、主题、会话"><a href="#MQTT协议中的订阅、主题、会话" class="headerlink" title="MQTT协议中的订阅、主题、会话"></a>MQTT协议中的订阅、主题、会话</h3><p>订阅(Subcription)</p>
-<p>订阅包含主题筛选器(Topic Filter)和最大服务质量(QoS)。<br>订阅会与一个会话(Session)关联。<br>一个会话可以包含多个订阅。<br>每一个会话中的每个订阅都有一个不同的主题筛选器。</p>
-<p>会话(Session)</p>
-<p>每个客户端与服务器建立连接后就是一个会话，客户端和服务器之间有状态交互。<br>会话存在与一个网络之间，也可能在客户端和服务器之间跨越多个连续的网络连接。</p>
-<p>主题名(Topic Name)</p>
-<p>连接到一个应用程序消息的标签，该标签与服务器的订阅相匹配。<br>服务器会将消息发送给订阅所匹配标签的每个客户端。</p>
-<p>主题筛选器(Topic Filter)</p>
-<p>一个对主题名通配符筛选，在订阅表达式中使用，表示订阅所匹配到的多个主题。</p>
-<p>负载(Payload)</p>
-<p>消息订阅者所具体接收到的内容</p>
+<h3 id="MQTT协议中的订阅、主题、会话"><a href="#MQTT协议中的订阅、主题、会话" class="headerlink" title="MQTT协议中的订阅、主题、会话"></a>MQTT协议中的订阅、主题、会话</h3><ul>
+<li><p>订阅(Subcription)<br>订阅包含主题筛选器(Topic Filter)和最大服务质量(QoS)。<br>订阅会与一个会话(Session)关联。<br>一个会话可以包含多个订阅。<br>每一个会话中的每个订阅都有一个不同的主题筛选器。</p>
+</li>
+<li><p>会话(Session)<br>每个客户端与服务器建立连接后就是一个会话，客户端和服务器之间有状态交互。<br>会话存在与一个网络之间，也可能在客户端和服务器之间跨越多个连续的网络连接。</p>
+</li>
+<li><p>主题名(Topic Name)<br>连接到一个应用程序消息的标签，该标签与服务器的订阅相匹配。<br>服务器会将消息发送给订阅所匹配标签的每个客户端。</p>
+</li>
+<li><p>主题筛选器(Topic Filter)<br>一个对主题名通配符筛选，在订阅表达式中使用，表示订阅所匹配到的多个主题。</p>
+</li>
+<li><p>负载(Payload)<br>消息订阅者所具体接收到的内容</p>
+</li>
+</ul>
 <h3 id="MQTT协议中的方法"><a href="#MQTT协议中的方法" class="headerlink" title="MQTT协议中的方法"></a>MQTT协议中的方法</h3><p>MQTT协议中定义了一些方法（也被称之为动作），用来表示对确定资源所进行的操作。这个资源可以代表预先存在的数据或动态生成数据，这取决于服务器的实现。通常来说，资源指服务器上的文件或输出。</p>
 <ul>
 <li>Connect 等待与服务器建立连接</li>
@@ -408,9 +410,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/网络/" rel="tag"># 网络</a>
-          
             <a href="/tags/物联网/" rel="tag"># 物联网</a>
+          
+            <a href="/tags/网络/" rel="tag"># 网络</a>
           
             <a href="/tags/通讯/" rel="tag"># 通讯</a>
           
