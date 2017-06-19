@@ -338,6 +338,48 @@
 </ul>
 </li>
 </ul>
+<h2 id="MQTT协议原理"><a href="#MQTT协议原理" class="headerlink" title="MQTT协议原理"></a>MQTT协议原理</h2><h3 id="MQTT协议的实现方式"><a href="#MQTT协议的实现方式" class="headerlink" title="MQTT协议的实现方式"></a>MQTT协议的实现方式</h3><ul>
+<li>实现MQTT协议需要：客户端和服务器端</li>
+<li>MQTT协议中有两种身份：发布者(publish)、代理(Broker)、订阅者(Subscribe)。其中消息的发表者和订阅者都是客户端，消息代理是服务器，<strong>消息发布者可以同时是订阅者</strong>。</li>
+<li>MQTT传输的消息分为：主题(Topic)和负载(payload)两部分<ul>
+<li>Topic，可以理解为消息的类型，订阅者订阅后，就会收到该主题的消息内容(payload)</li>
+<li>payload，可以理解为消息的内容，是指订阅者具体要使用的内容。</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络传输和应用消息"><a href="#网络传输和应用消息" class="headerlink" title="网络传输和应用消息"></a>网络传输和应用消息</h3><p>MQTT会构建底层网络传输：它将建立客户端到服务器的连接，提供两者之间的一个有序的、无损的、基于字节流的双向传输。<br>当应用数据通过MQTT网络传输时，MQTT会把与之相关的服务质量(QoS)和主题名(Topic)相关联。</p>
+<h3 id="MQTT客户端"><a href="#MQTT客户端" class="headerlink" title="MQTT客户端"></a>MQTT客户端</h3><p>一个使用MQTT协议的应用程序或者设备，它总是建立到服务器的网络连接。客户端可以：</p>
+<ul>
+<li>发布其他客户端会订阅的信息</li>
+<li>订阅其他客户端发布的消息</li>
+<li>退订或删除应用程序的消息</li>
+<li>断开与服务器的连接</li>
+</ul>
+<h3 id="MQTT服务器"><a href="#MQTT服务器" class="headerlink" title="MQTT服务器"></a>MQTT服务器</h3><p>MQTT服务器也成为消息代理(Broker)，可以是一个应用或一台设备。<br>它位于消息发布者和订阅者之间，它可以：</p>
+<ul>
+<li>接受来自客户的网络连接</li>
+<li>接收客户端发布的应用信息</li>
+<li>处理来自客户端的订阅和退订请求</li>
+<li>向订阅的客户转发应用程序消息</li>
+</ul>
+<h3 id="MQTT协议中的订阅、主题、会话"><a href="#MQTT协议中的订阅、主题、会话" class="headerlink" title="MQTT协议中的订阅、主题、会话"></a>MQTT协议中的订阅、主题、会话</h3><p>订阅(Subcription)</p>
+<p>订阅包含主题筛选器(Topic Filter)和最大服务质量(QoS)。<br>订阅会与一个会话(Session)关联。<br>一个会话可以包含多个订阅。<br>每一个会话中的每个订阅都有一个不同的主题筛选器。</p>
+<p>会话(Session)</p>
+<p>每个客户端与服务器建立连接后就是一个会话，客户端和服务器之间有状态交互。<br>会话存在与一个网络之间，也可能在客户端和服务器之间跨越多个连续的网络连接。</p>
+<p>主题名(Topic Name)</p>
+<p>连接到一个应用程序消息的标签，该标签与服务器的订阅相匹配。<br>服务器会将消息发送给订阅所匹配标签的每个客户端。</p>
+<p>主题筛选器(Topic Filter)</p>
+<p>一个对主题名通配符筛选，在订阅表达式中使用，表示订阅所匹配到的多个主题。</p>
+<p>负载(Payload)</p>
+<p>消息订阅者所具体接收到的内容</p>
+<h3 id="MQTT协议中的方法"><a href="#MQTT协议中的方法" class="headerlink" title="MQTT协议中的方法"></a>MQTT协议中的方法</h3><p>MQTT协议中定义了一些方法（也被称之为动作），用来表示对确定资源所进行的操作。这个资源可以代表预先存在的数据或动态生成数据，这取决于服务器的实现。通常来说，资源指服务器上的文件或输出。</p>
+<ul>
+<li>Connect 等待与服务器建立连接</li>
+<li>Disconnect 等待MQTT客户端完成所做的工作，并与服务器断开TCP/IP会话</li>
+<li>Subscribe 等待完成订阅</li>
+<li>UnSubscribe 等待服务器取消客户端的一个或多个Topic订阅</li>
+<li>Publish MQTT客户端发送消息请求，发送完成后返回应用程序线程</li>
+</ul>
 
           
         
