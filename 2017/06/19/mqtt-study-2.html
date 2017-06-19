@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="物联网,网络,通讯," />
+  <meta name="keywords" content="网络,物联网,通讯," />
 
 
 
@@ -94,13 +94,13 @@
 
 
 <meta name="description" content="协议初解MQTT整体上协议可以拆分为： 固定头部+可变头部+消息体。 协议说白了就是对于对方通信的一个约定，比如传过来一个字符流，第1个字节表示什么，第2个字节表示什么诸如此类的约定。 固定头部的构造如下：    bit 7 6 5 4 3 2 1 0     byte 1 [  Message Type ] DUP flag [QoS level ] RETAIN   byte 2 [   Re">
-<meta name="keywords" content="物联网,网络,通讯">
+<meta name="keywords" content="网络,物联网,通讯">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MQTT折腾记录(2) -- MQTT协议详解">
 <meta property="og:url" content="http://yoursite.com/2017/06/19/mqtt-study-2.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
 <meta property="og:description" content="协议初解MQTT整体上协议可以拆分为： 固定头部+可变头部+消息体。 协议说白了就是对于对方通信的一个约定，比如传过来一个字符流，第1个字节表示什么，第2个字节表示什么诸如此类的约定。 固定头部的构造如下：    bit 7 6 5 4 3 2 1 0     byte 1 [  Message Type ] DUP flag [QoS level ] RETAIN   byte 2 [   Re">
-<meta property="og:updated_time" content="2017-06-19T05:52:19.948Z">
+<meta property="og:updated_time" content="2017-06-19T07:01:26.290Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MQTT折腾记录(2) -- MQTT协议详解">
 <meta name="twitter:description" content="协议初解MQTT整体上协议可以拆分为： 固定头部+可变头部+消息体。 协议说白了就是对于对方通信的一个约定，比如传过来一个字符流，第1个字节表示什么，第2个字节表示什么诸如此类的约定。 固定头部的构造如下：    bit 7 6 5 4 3 2 1 0     byte 1 [  Message Type ] DUP flag [QoS level ] RETAIN   byte 2 [   Re">
@@ -363,6 +363,34 @@
 </tr>
 </tbody>
 </table>
+<ol>
+<li>Message Type (0和15保留，共占用4个字节)</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> $operations = <span class="keyword">array</span>(</div><div class="line">	<span class="string">"MQTT_CONNECT"</span>=&gt;<span class="number">1</span>,<span class="comment">//请求连接</span></div><div class="line">	<span class="string">"MQTT_CONNACK"</span>=&gt;<span class="number">2</span>,<span class="comment">//请求应答</span></div><div class="line">	<span class="string">"MQTT_PUBLISH"</span>=&gt;<span class="number">3</span>,<span class="comment">//发布消息</span></div><div class="line">	<span class="string">"MQTT_PUBACK"</span>=&gt;<span class="number">4</span>,<span class="comment">//发布应答</span></div><div class="line">	<span class="string">"MQTT_PUBREC"</span>=&gt;<span class="number">5</span>,<span class="comment">//发布已接收,保证传递1</span></div><div class="line">	<span class="string">"MQTT_PUBREL"</span>=&gt;<span class="number">6</span>,<span class="comment">//发布释放，保证传递2</span></div><div class="line">	<span class="string">"MQTT_PUBCOMP"</span>=&gt;<span class="number">7</span>,<span class="comment">//发布完成，保证传递3</span></div><div class="line">	<span class="string">"MQTT_SUBSCRIBE"</span>=&gt;<span class="number">8</span>,<span class="comment">//订阅请求</span></div><div class="line">	<span class="string">"MQTT_SUBACK"</span>=&gt;<span class="number">9</span>,<span class="comment">//订阅应答</span></div><div class="line">	<span class="string">"MQTT_UNSUBSCRIBE"</span>=&gt;<span class="number">10</span>,<span class="comment">//取消订阅</span></div><div class="line">	<span class="string">"MQTT_UNSUBACK"</span>=&gt;<span class="number">11</span>,<span class="comment">//取消订阅应答</span></div><div class="line">	<span class="string">"MQTT_PINGREQ"</span>=&gt;<span class="number">12</span>,<span class="comment">//ping请求</span></div><div class="line">	<span class="string">"MQTT_PINGRESP"</span>=&gt;<span class="number">13</span>,<span class="comment">//ping响应</span></div><div class="line">	<span class="string">"MQTT_DISCONNECT"</span>=&gt;<span class="number">14</span><span class="comment">//断开连接</span></div><div class="line">);</div></pre></td></tr></table></figure>
+<ol>
+<li>DUP flag</li>
+</ol>
+<p>用于保证在消息传输可靠的，如果设置为1，则在下面的变长头部里多加MessageId，并需要回复确认，保证消息传输完成，但不能用于检测消息重复发送。</p>
+<ol>
+<li>QoS</li>
+</ol>
+<p>主要用于publish（发布消息），保证消息传递的次数：</p>
+<ul>
+<li>00 表示最多一次 &lt;=1</li>
+<li>01 表示最少一次 &gt;=1</li>
+<li>10 表示仅有一次 ==1</li>
+<li>11 保留</li>
+</ul>
+<ol>
+<li>Retain </li>
+</ol>
+<p>主要用于publish（发布消息），表示服务器要保留这次推送的消息，如果有新的订阅者出现，就把这消息给它。如果不设，那么推送至当前订阅的就释放了。</p>
+<ol>
+<li>固定头部的byte 2</li>
+</ol>
+<p>是用来保存接下去的变长头部+消息体的总大小的。</p>
+<p>但是不是并不是直接保存的，同样也是可以扩展的，其机制是，前7位用于保存长度，后1位用作标识。</p>
+<p>举例：如果计算出后面的大小为0&lt;length&lt;=127的，正常保存，<br>如果计算127&lt;length&lt;16383的，则需要两个字节保存，将第一个字节的最大一个位置1，表示未完。然后第二个字节继续存。</p>
 
       
     </div>
@@ -392,9 +420,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/物联网/" rel="tag"># 物联网</a>
-          
             <a href="/tags/网络/" rel="tag"># 网络</a>
+          
+            <a href="/tags/物联网/" rel="tag"># 物联网</a>
           
             <a href="/tags/通讯/" rel="tag"># 通讯</a>
           
@@ -418,6 +446,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/19/Markdown Reference.html" rel="prev" title="markdown语法参考">
+                markdown语法参考 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -489,7 +521,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
