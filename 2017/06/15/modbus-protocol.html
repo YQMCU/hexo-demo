@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="编程,Modbus,单片机," />
 
 
 
@@ -93,16 +93,17 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="安科瑞的BMS 485通讯协议，基于Modbus/TPU模式，主站和从站之间传递的通讯信息为11字格式，即1位起始位，8位数据位，1位停止位，无校验 Modbus协议缺省是1位起始位，8位数据位，偶校验，一个停止位 Modbus通讯帧分析： 发送02 03 00 01 00 01 D5 F9 (RTU方式-奇校验) 01  子站地址03  功能码00 01 起始寄存器地址00 01 长度D5 F9">
+<meta name="keywords" content="编程,Modbus,单片机">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/06/10/hello-world.html">
+<meta property="og:title" content="modbus_protocol">
+<meta property="og:url" content="http://yoursite.com/2017/06/15/modbus-protocol.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-06-10T09:12:39.918Z">
+<meta property="og:description" content="安科瑞的BMS 485通讯协议，基于Modbus/TPU模式，主站和从站之间传递的通讯信息为11字格式，即1位起始位，8位数据位，1位停止位，无校验 Modbus协议缺省是1位起始位，8位数据位，偶校验，一个停止位 Modbus通讯帧分析： 发送02 03 00 01 00 01 D5 F9 (RTU方式-奇校验) 01  子站地址03  功能码00 01 起始寄存器地址00 01 长度D5 F9">
+<meta property="og:updated_time" content="2017-06-19T01:44:41.251Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="modbus_protocol">
+<meta name="twitter:description" content="安科瑞的BMS 485通讯协议，基于Modbus/TPU模式，主站和从站之间传递的通讯信息为11字格式，即1位起始位，8位数据位，1位停止位，无校验 Modbus协议缺省是1位起始位，8位数据位，偶校验，一个停止位 Modbus通讯帧分析： 发送02 03 00 01 00 01 D5 F9 (RTU方式-奇校验) 01  子站地址03  功能码00 01 起始寄存器地址00 01 长度D5 F9">
 
 
 
@@ -130,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/06/10/hello-world.html"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/15/modbus-protocol.html"/>
 
 
 
 
 
-  <title>Hello World | YQMCU's Blog</title>
+  <title>modbus_protocol | YQMCU's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -256,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/10/hello-world.html">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/modbus-protocol.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="缘起花渊">
@@ -273,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">modbus_protocol</h1>
         
 
         <div class="post-meta">
@@ -285,8 +286,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-10T16:36:25+08:00">
-                2017-06-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-15T16:12:10+08:00">
+                2017-06-15
               </time>
             
 
@@ -320,15 +321,94 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>安科瑞的BMS 485通讯协议，基于Modbus/TPU模式，<br>主站和从站之间传递的通讯信息为11字格式，即1位起始位，8位数据位，1位停止位，无校验</p>
+<p>Modbus协议缺省是1位起始位，8位数据位，偶校验，一个停止位</p>
+<p>Modbus通讯帧分析：</p>
+<p>发送<br>02 03 00 01 00 01 D5 F9 (RTU方式-奇校验)</p>
+<p>01  子站地址<br>03  功能码<br>00 01 起始寄存器地址<br>00 01 长度<br>D5 F9 CRC校验</p>
+<p>这个功能是从子站02读取0001存储区取0001个数据到主站，从站会返回一系列的数据依据一定格式到端口</p>
+<p>从站接收到的数据流是否应该是：（低位优先）</p>
+<p>1…11 0 00000010 0 (hx:02)</p>
+<p>起始  停止  数据  校验</p>
+<p><a href="https://wenku.baidu.com/view/27dd3c000912a216147929f2.html" target="_blank" rel="external">https://wenku.baidu.com/view/27dd3c000912a216147929f2.html</a></p>
+<p>为什么MODBUS报文里面看不到起始位、停止位及校验位？-专业自动化论坛-中国工控网<br><a href="http://bbs.gongkong.com/d/201104/374122_1.shtml" target="_blank" rel="external">http://bbs.gongkong.com/d/201104/374122_1.shtml</a></p>
+<p>PLC传送数据寄存器 传送信息</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">寄存器</th>
+<th style="text-align:center">DATA</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">D1089下</td>
+<td style="text-align:center">01H</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1090下</td>
+<td style="text-align:center">03H</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1091下</td>
+<td style="text-align:center">21H</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1092下</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1093下</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1094下</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1095下</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1096下</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>为什么MODBUS报文里面看不到起始位、停止位及校验位？-专业自动化论坛-中国工控网<br><a href="http://bbs.gongkong.com/d/201104/374122_1.shtml" target="_blank" rel="external">http://bbs.gongkong.com/d/201104/374122_1.shtml</a></p>
 
       
     </div>
@@ -356,6 +436,16 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/编程/" rel="tag"># 编程</a>
+          
+            <a href="/tags/Modbus/" rel="tag"># Modbus</a>
+          
+            <a href="/tags/单片机/" rel="tag"># 单片机</a>
+          
+        </div>
+      
 
       
       
@@ -365,14 +455,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/06/15/luat-ari810-play.html" rel="next" title="luat_ari810_play">
+                <i class="fa fa-chevron-left"></i> luat_ari810_play
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/13/luat_first.html" rel="prev" title="luat first">
-                luat first <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/19/mqtt-study-1.html" rel="prev" title="MQTT折腾记录(1)">
+                MQTT折腾记录(1) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -420,17 +514,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -483,22 +568,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
