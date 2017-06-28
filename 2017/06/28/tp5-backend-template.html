@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/28/tp5-backend-template.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
 <meta property="og:description" content="gitbub 地址https://github.com/xs47968224/Thinkphp-5.0-backend-template 记录应用入口/public/index.php 应用源/application 项目架构Admin 模块/application/admin/controller/application/admin/model/application/admin/view 静态">
-<meta property="og:updated_time" content="2017-06-28T04:42:38.874Z">
+<meta property="og:updated_time" content="2017-06-28T04:51:25.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于TP5的后台界面初探">
 <meta name="twitter:description" content="gitbub 地址https://github.com/xs47968224/Thinkphp-5.0-backend-template 记录应用入口/public/index.php 应用源/application 项目架构Admin 模块/application/admin/controller/application/admin/model/application/admin/view 静态">
@@ -327,6 +327,29 @@
 <h2 id="项目架构"><a href="#项目架构" class="headerlink" title="项目架构"></a>项目架构</h2><h3 id="Admin-模块"><a href="#Admin-模块" class="headerlink" title="Admin 模块"></a>Admin 模块</h3><p>/application/admin/controller<br>/application/admin/model<br>/application/admin/view</p>
 <h3 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h3><p>/public/css<br>/public/js<br>…</p>
 <h2 id="类初始化函数"><a href="#类初始化函数" class="headerlink" title="类初始化函数"></a>类初始化函数</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassName</span> <span class="title">extend</span> <span class="title">think</span>/<span class="title">Controller</span></span>&#123;</div><div class="line">	<span class="keyword">protected</span> _initialize()&#123;</div><div class="line">		<span class="comment">/* initialize codes */</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="PHP函数"><a href="#PHP函数" class="headerlink" title="PHP函数"></a>PHP函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">in_array(search,array,[type])</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">search</td>
+<td style="text-align:center">查找的值</td>
+</tr>
+<tr>
+<td style="text-align:center">array</td>
+<td style="text-align:center">被查找的数组</td>
+</tr>
+<tr>
+<td style="text-align:center">type</td>
+<td style="text-align:center">若为true，检查两者的类型</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -499,7 +522,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gitbub-地址"><span class="nav-number">1.</span> <span class="nav-text">gitbub 地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#记录"><span class="nav-number">2.</span> <span class="nav-text">记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用入口"><span class="nav-number">2.1.</span> <span class="nav-text">应用入口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用源"><span class="nav-number">2.2.</span> <span class="nav-text">应用源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目架构"><span class="nav-number">2.3.</span> <span class="nav-text">项目架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Admin-模块"><span class="nav-number">2.3.1.</span> <span class="nav-text">Admin 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态资源"><span class="nav-number">2.3.2.</span> <span class="nav-text">静态资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类初始化函数"><span class="nav-number">2.4.</span> <span class="nav-text">类初始化函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gitbub-地址"><span class="nav-number">1.</span> <span class="nav-text">gitbub 地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#记录"><span class="nav-number">2.</span> <span class="nav-text">记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用入口"><span class="nav-number">2.1.</span> <span class="nav-text">应用入口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用源"><span class="nav-number">2.2.</span> <span class="nav-text">应用源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目架构"><span class="nav-number">2.3.</span> <span class="nav-text">项目架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Admin-模块"><span class="nav-number">2.3.1.</span> <span class="nav-text">Admin 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态资源"><span class="nav-number">2.3.2.</span> <span class="nav-text">静态资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类初始化函数"><span class="nav-number">2.4.</span> <span class="nav-text">类初始化函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP函数"><span class="nav-number">2.5.</span> <span class="nav-text">PHP函数</span></a></li></ol></li></ol></div>
             
 
           </div>
