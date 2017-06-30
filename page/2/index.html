@@ -254,6 +254,177 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/19/mqtt-study-1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="缘起花渊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YQMCU's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/19/mqtt-study-1.html" itemprop="url">MQTT折腾记录(1) -- MQTT初探</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T09:46:19+08:00">
+                2017-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>MQTT(Message Queuing Telemetry Transport,消息队列遥测传输协议)，是一种基于<strong>发布/订阅</strong>(publish/subscribe)模式的轻量级通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。</p>
+<p>MQTT最大的优点在于，可以以极少的代码和优先的带宽，为连接远程设备提供<strong>实时</strong>可靠的消息服务。</p>
+<p>作为一种<strong>低开销</strong>、<strong>低带宽</strong>占用的即时通讯协议，使其在物联网、小型设备、移动应用等方面有较为广泛的应用。</p>
+<h2 id="MQTT协议特点"><a href="#MQTT协议特点" class="headerlink" title="MQTT协议特点"></a>MQTT协议特点</h2><p>MQTT是一个基于客户端-服务器的消息发布/订阅传输协议。<br>MQTT协议是轻量、简单、开放和易于实现的，这些特点使它适用范围非常广泛。<br>在很多情况下，包括受限的环境中，如：机器与机器（M2M）和物联网（IOT）。其在，通过卫星链路通信传感器、偶尔拨号的医疗设备、智能家居及一些小型化设备中已广泛使用。</p>
+<p>MQTT协议当前版本是2014年发布的<a href="http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html" target="_blank" rel="external">MQTT v3.1.1</a>.除了标准版外，还要一个简化版<code>MQTT-SN</code>，该协议主要针对嵌入式设备，这些设备一般工作于TCP/IP网络，如：ZigBee。</p>
+<p>MQTT协议运行在<a href="https://itbilu.com/nodejs/core/VkcdcFq9.html#OSI" target="_blank" rel="external">TCP/IP</a>或其他网络协议，提供有序、无损、双向连接。其特点包括：</p>
+<ul>
+<li>使用发布/订阅消息模式，它提供了一对多消息分发，以实现与应用程序的解耦</li>
+<li>对负载内容屏蔽的消息传输机制</li>
+<li>对传输消息有三种服务质量（QoS）：<ul>
+<li>QoS 0，最多一次，这一级别会发生消息丢失或重复，消息发布依赖于底层TCP/IP网络。即&lt;=1</li>
+<li>QoS 1，最少一次，这以级别会确保消息到达，但消息可能会重复。即&gt;=1</li>
+<li>QoS 2，恰好一次，确保消息只有一次到达，即=1.在一些要求严格的计费系统中，可以使用此级别</li>
+</ul>
+</li>
+</ul>
+<h2 id="MQTT协议原理"><a href="#MQTT协议原理" class="headerlink" title="MQTT协议原理"></a>MQTT协议原理</h2><h3 id="MQTT协议的实现方式"><a href="#MQTT协议的实现方式" class="headerlink" title="MQTT协议的实现方式"></a>MQTT协议的实现方式</h3><ul>
+<li>实现MQTT协议需要：客户端和服务器端</li>
+<li>MQTT协议中有两种身份：发布者(publish)、代理(Broker)、订阅者(Subscribe)。其中消息的发表者和订阅者都是客户端，消息代理是服务器，<strong>消息发布者可以同时是订阅者</strong>。</li>
+<li>MQTT传输的消息分为：主题(Topic)和负载(payload)两部分<ul>
+<li>Topic，可以理解为消息的类型，订阅者订阅后，就会收到该主题的消息内容(payload)</li>
+<li>payload，可以理解为消息的内容，是指订阅者具体要使用的内容。</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络传输和应用消息"><a href="#网络传输和应用消息" class="headerlink" title="网络传输和应用消息"></a>网络传输和应用消息</h3><p>MQTT会构建底层网络传输：它将建立客户端到服务器的连接，提供两者之间的一个有序的、无损的、基于字节流的双向传输。<br>当应用数据通过MQTT网络传输时，MQTT会把与之相关的服务质量(QoS)和主题名(Topic)相关联。</p>
+<h3 id="MQTT客户端"><a href="#MQTT客户端" class="headerlink" title="MQTT客户端"></a>MQTT客户端</h3><p>一个使用MQTT协议的应用程序或者设备，它总是建立到服务器的网络连接。客户端可以：</p>
+<ul>
+<li>发布其他客户端会订阅的信息</li>
+<li>订阅其他客户端发布的消息</li>
+<li>退订或删除应用程序的消息</li>
+<li>断开与服务器的连接</li>
+</ul>
+<h3 id="MQTT服务器"><a href="#MQTT服务器" class="headerlink" title="MQTT服务器"></a>MQTT服务器</h3><p>MQTT服务器也成为消息代理(Broker)，可以是一个应用或一台设备。<br>它位于消息发布者和订阅者之间，它可以：</p>
+<ul>
+<li>接受来自客户的网络连接</li>
+<li>接收客户端发布的应用信息</li>
+<li>处理来自客户端的订阅和退订请求</li>
+<li>向订阅的客户转发应用程序消息</li>
+</ul>
+<h3 id="MQTT协议中的订阅、主题、会话"><a href="#MQTT协议中的订阅、主题、会话" class="headerlink" title="MQTT协议中的订阅、主题、会话"></a>MQTT协议中的订阅、主题、会话</h3><ul>
+<li><p>订阅(Subcription)<br>订阅包含主题筛选器(Topic Filter)和最大服务质量(QoS)。<br>订阅会与一个会话(Session)关联。<br>一个会话可以包含多个订阅。<br>每一个会话中的每个订阅都有一个不同的主题筛选器。</p>
+</li>
+<li><p>会话(Session)<br>每个客户端与服务器建立连接后就是一个会话，客户端和服务器之间有状态交互。<br>会话存在与一个网络之间，也可能在客户端和服务器之间跨越多个连续的网络连接。</p>
+</li>
+<li><p>主题名(Topic Name)<br>连接到一个应用程序消息的标签，该标签与服务器的订阅相匹配。<br>服务器会将消息发送给订阅所匹配标签的每个客户端。</p>
+</li>
+<li><p>主题筛选器(Topic Filter)<br>一个对主题名通配符筛选，在订阅表达式中使用，表示订阅所匹配到的多个主题。</p>
+</li>
+<li><p>负载(Payload)<br>消息订阅者所具体接收到的内容</p>
+</li>
+</ul>
+<h3 id="MQTT协议中的方法"><a href="#MQTT协议中的方法" class="headerlink" title="MQTT协议中的方法"></a>MQTT协议中的方法</h3><p>MQTT协议中定义了一些方法（也被称之为动作），用来表示对确定资源所进行的操作。这个资源可以代表预先存在的数据或动态生成数据，这取决于服务器的实现。通常来说，资源指服务器上的文件或输出。</p>
+<ul>
+<li>Connect 等待与服务器建立连接</li>
+<li>Disconnect 等待MQTT客户端完成所做的工作，并与服务器断开TCP/IP会话</li>
+<li>Subscribe 等待完成订阅</li>
+<li>UnSubscribe 等待服务器取消客户端的一个或多个Topic订阅</li>
+<li>Publish MQTT客户端发送消息请求，发送完成后返回应用程序线程</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/modbus-protocol.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1186,7 +1357,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1199,7 +1370,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
