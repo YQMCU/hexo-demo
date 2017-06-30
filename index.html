@@ -254,6 +254,159 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/30/nodejs-tcp-net.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="缘起花渊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YQMCU's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/30/nodejs-tcp-net.html" itemprop="url">node.js TCP编程 - net模块</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-30T14:20:50+08:00">
+                2017-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Node.js Net 模块提供了一些用于底层的网络通信的小工具，包含了创建服务器/客户端的方法，我们可以通过以下方式引入该模块：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>)</div></pre></td></tr></table></figure></p>
+<p>做node服务端编程，net基本是绕不开的一个模块。</p>
+<p>从组成来看，net模块主要包含两部分，了解socket编程的同学应该比较熟悉了：</p>
+<ul>
+<li>net.Server：TCP server，内部通过socket来实现与客户端的通信。</li>
+<li>net.Socket：tcp/本地 socket的node版实现，它实现了全双工的stream接口。</li>
+</ul>
+<h1 id="简单的C-S-client-server-Demo"><a href="#简单的C-S-client-server-Demo" class="headerlink" title="简单的C/S(client/server)Demo"></a>简单的C/S(client/server)Demo</h1><p>tcp服务端程序：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> PORT = <span class="number">3000</span>;</div><div class="line"><span class="keyword">var</span> HOST = <span class="string">'127.0.0.1'</span>;</div><div class="line"> </div><div class="line"><span class="comment">// tcp服务端</span></div><div class="line"><span class="keyword">var</span> server = net.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">socket</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'服务端：收到来自客户端的请求'</span>);</div><div class="line"> </div><div class="line">    socket.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'服务端：收到客户端数据，内容为&#123;'</span>+ data +<span class="string">'&#125;'</span>);</div><div class="line"> </div><div class="line">        <span class="comment">// 给客户端返回数据</span></div><div class="line">        socket.write(<span class="string">'你好，我是服务端'</span>);</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    socket.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">         <span class="built_in">console</span>.log(<span class="string">'服务端：客户端连接断开'</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line">server.listen(PORT, HOST, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'服务端：开始监听来自客户端的请求'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>tcp客户端</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> PORT = <span class="number">3000</span>;</div><div class="line"><span class="keyword">var</span> HOST = <span class="string">'127.0.0.1'</span>;</div><div class="line"> </div><div class="line"><span class="comment">// tcp客户端</span></div><div class="line"><span class="keyword">var</span> client = net.createConnection(PORT, HOST);</div><div class="line"> </div><div class="line">client.on(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端：已经与服务端建立连接'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">client.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端：收到服务端数据，内容为&#123;'</span>+ data +<span class="string">'&#125;'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">client.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端：连接断开'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">client.end(<span class="string">'你好，我是客户端'</span>);</div></pre></td></tr></table></figure>
+<p>服务端：<br>服务端：开始监听来自客户端的请求<br>服务端：收到来自客户端的请求<br>服务端：收到客户端数据，内容为{你好，我是客户端}<br>服务端：客户端连接断开</p>
+<p>客户端：<br>客户端：已经与服务端建立连接<br>客户端：收到服务端数据，内容为{你好，我是服务端}<br>客户端：连接断开</p>
+<p>事件 listening/connection/close/error</p>
+<p>listening：调用 server.listen()，正式开始监听请求的时候触发。</p>
+<p>connection：当有新的请求进来时触发，参数为请求相关的 socket。</p>
+<p>close：服务端关闭的时候触发。</p>
+<p>error：服务出错的时候触发，比如监听了已经被占用的端口。</p>
+<p>API、属性归类<br>以下对net.Socket的API跟属性，按照用途进行了大致的分类，方便读者更好的理解。大部分API跟属性都比较简单，看下文档就知道做什么的，这里就先不展开。</p>
+<p>连接相关</p>
+<p>socket.connect()：有3种不同的参数，用于不同的场景；</p>
+<p>socket.setTimeout()：用来进行连接超时设置。</p>
+<p>socket.setKeepAlive()：用来设置长连接。</p>
+<p>socket.destroy(）、socket.destroyed：当错误发生时，用来销毁socket，确保这个socket上不会再有其他的IO操作。</p>
+<p>数据读、写相关</p>
+<p>socket.write()、socket.end()、socket.pause()、socket.resume()、socket.setEncoding()、socket.setNoDelay()</p>
+<p>数据属性相关</p>
+<p>socket.bufferSize、socket.bytesRead、socket.bytesWritten</p>
+<p>事件循环相关</p>
+<p>socket.ref()、socket.unref()</p>
+<p>地址相关</p>
+<p>socket.address()</p>
+<p>socket.remoteAddress、socket.remoteFamily、socket.remotePort</p>
+<p>socket.localAddress/socket.localPort</p>
+<p>事件简介<br>data：当收到另一侧传来的数据时触发。</p>
+<p>connect：当连接建立时触发。</p>
+<p>close：连接断开时触发。如果是因为传输错误导致的连接断开，则参数为error。</p>
+<p>end：当连接另一侧发送了 FIN 包的时候触发（读者可以回顾下HTTP如何断开连接的）。默认情况下（allowHalfOpen == false），socket会完成自我销毁操作。但你也可以把 allowHalfOpen 设置为 true，这样就可以继续往socket里写数据。当然，最后你需要手动调用 socket.end()</p>
+<p>error：当有错误发生时，就会触发，参数为error。（官方文档基本一句话带过，不过考虑到出错的可能太多，也可以理解）</p>
+<p>timeout：提示用户，socket 已经超时，需要手动关闭连接。</p>
+<p>drain：当写缓存空了的时候触发。（不是很好描述，具体可以看下stream的介绍）</p>
+<p>lookup：域名解析完成时触发。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/28/tcpip-http.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1644,205 +1797,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/modbus-protocol.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="缘起花渊">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YQMCU's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/15/modbus-protocol.html" itemprop="url">modbus_protocol</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-15T16:12:10+08:00">
-                2017-06-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>安科瑞的BMS 485通讯协议，基于Modbus/TPU模式，<br>主站和从站之间传递的通讯信息为11字格式，即1位起始位，8位数据位，1位停止位，无校验</p>
-<p>Modbus协议缺省是1位起始位，8位数据位，偶校验，一个停止位</p>
-<p>Modbus通讯帧分析：</p>
-<p>发送<br>02 03 00 01 00 01 D5 F9 (RTU方式-奇校验)</p>
-<p>01  子站地址<br>03  功能码<br>00 01 起始寄存器地址<br>00 01 长度<br>D5 F9 CRC校验</p>
-<p>这个功能是从子站02读取0001存储区取0001个数据到主站，从站会返回一系列的数据依据一定格式到端口</p>
-<p>从站接收到的数据流是否应该是：（低位优先）</p>
-<p>1…11 0 00000010 0 (hx:02)</p>
-<p>起始  停止  数据  校验</p>
-<p><a href="https://wenku.baidu.com/view/27dd3c000912a216147929f2.html" target="_blank" rel="external">https://wenku.baidu.com/view/27dd3c000912a216147929f2.html</a></p>
-<p>为什么MODBUS报文里面看不到起始位、停止位及校验位？-专业自动化论坛-中国工控网<br><a href="http://bbs.gongkong.com/d/201104/374122_1.shtml" target="_blank" rel="external">http://bbs.gongkong.com/d/201104/374122_1.shtml</a></p>
-<p>PLC传送数据寄存器 传送信息</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">寄存器</th>
-<th style="text-align:center">DATA</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">D1089下</td>
-<td style="text-align:center">01H</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">D1090下</td>
-<td style="text-align:center">03H</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">D1091下</td>
-<td style="text-align:center">21H</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">D1092下</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">D1093下</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">D1094下</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">D1095下</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">D1096下</td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center"></th>
-<th style="text-align:center"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-<p>为什么MODBUS报文里面看不到起始位、停止位及校验位？-专业自动化论坛-中国工控网<br><a href="http://bbs.gongkong.com/d/201104/374122_1.shtml" target="_blank" rel="external">http://bbs.gongkong.com/d/201104/374122_1.shtml</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1892,7 +1846,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1905,7 +1859,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

@@ -254,6 +254,205 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/modbus-protocol.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="缘起花渊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YQMCU's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/15/modbus-protocol.html" itemprop="url">modbus_protocol</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-15T16:12:10+08:00">
+                2017-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>安科瑞的BMS 485通讯协议，基于Modbus/TPU模式，<br>主站和从站之间传递的通讯信息为11字格式，即1位起始位，8位数据位，1位停止位，无校验</p>
+<p>Modbus协议缺省是1位起始位，8位数据位，偶校验，一个停止位</p>
+<p>Modbus通讯帧分析：</p>
+<p>发送<br>02 03 00 01 00 01 D5 F9 (RTU方式-奇校验)</p>
+<p>01  子站地址<br>03  功能码<br>00 01 起始寄存器地址<br>00 01 长度<br>D5 F9 CRC校验</p>
+<p>这个功能是从子站02读取0001存储区取0001个数据到主站，从站会返回一系列的数据依据一定格式到端口</p>
+<p>从站接收到的数据流是否应该是：（低位优先）</p>
+<p>1…11 0 00000010 0 (hx:02)</p>
+<p>起始  停止  数据  校验</p>
+<p><a href="https://wenku.baidu.com/view/27dd3c000912a216147929f2.html" target="_blank" rel="external">https://wenku.baidu.com/view/27dd3c000912a216147929f2.html</a></p>
+<p>为什么MODBUS报文里面看不到起始位、停止位及校验位？-专业自动化论坛-中国工控网<br><a href="http://bbs.gongkong.com/d/201104/374122_1.shtml" target="_blank" rel="external">http://bbs.gongkong.com/d/201104/374122_1.shtml</a></p>
+<p>PLC传送数据寄存器 传送信息</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">寄存器</th>
+<th style="text-align:center">DATA</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">D1089下</td>
+<td style="text-align:center">01H</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1090下</td>
+<td style="text-align:center">03H</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1091下</td>
+<td style="text-align:center">21H</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1092下</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1093下</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1094下</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1095下</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D1096下</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>为什么MODBUS报文里面看不到起始位、停止位及校验位？-专业自动化论坛-中国工控网<br><a href="http://bbs.gongkong.com/d/201104/374122_1.shtml" target="_blank" rel="external">http://bbs.gongkong.com/d/201104/374122_1.shtml</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/luat-ari810-play.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -987,7 +1186,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1000,7 +1199,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
