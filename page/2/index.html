@@ -254,6 +254,187 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/19/mqtt-study-2.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="缘起花渊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YQMCU's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/19/mqtt-study-2.html" itemprop="url">MQTT折腾记录(2) -- MQTT协议详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T12:43:54+08:00">
+                2017-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="协议初解"><a href="#协议初解" class="headerlink" title="协议初解"></a>协议初解</h2><p>MQTT整体上协议可以拆分为： 固定头部+可变头部+消息体。</p>
+<p>协议说白了就是对于对方通信的一个约定，比如传过来一个字符流，第1个字节表示什么，第2个字节表示什么诸如此类的约定。</p>
+<p>固定头部的构造如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">bit</th>
+<th style="text-align:center">7</th>
+<th style="text-align:center">6</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">byte 1</td>
+<td style="text-align:center">[</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Message Type</td>
+<td style="text-align:center">]</td>
+<td style="text-align:center">DUP flag</td>
+<td style="text-align:center">[QoS level</td>
+<td style="text-align:center">]</td>
+<td style="text-align:center">RETAIN</td>
+</tr>
+<tr>
+<td style="text-align:center">byte 2</td>
+<td style="text-align:center">[</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Remaining Length</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">]</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Message Type (0和15保留，共占用4个字节)</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> $operations = <span class="keyword">array</span>(</div><div class="line">	<span class="string">"MQTT_CONNECT"</span>=&gt;<span class="number">1</span>,<span class="comment">//请求连接</span></div><div class="line">	<span class="string">"MQTT_CONNACK"</span>=&gt;<span class="number">2</span>,<span class="comment">//请求应答</span></div><div class="line">	<span class="string">"MQTT_PUBLISH"</span>=&gt;<span class="number">3</span>,<span class="comment">//发布消息</span></div><div class="line">	<span class="string">"MQTT_PUBACK"</span>=&gt;<span class="number">4</span>,<span class="comment">//发布应答</span></div><div class="line">	<span class="string">"MQTT_PUBREC"</span>=&gt;<span class="number">5</span>,<span class="comment">//发布已接收,保证传递1</span></div><div class="line">	<span class="string">"MQTT_PUBREL"</span>=&gt;<span class="number">6</span>,<span class="comment">//发布释放，保证传递2</span></div><div class="line">	<span class="string">"MQTT_PUBCOMP"</span>=&gt;<span class="number">7</span>,<span class="comment">//发布完成，保证传递3</span></div><div class="line">	<span class="string">"MQTT_SUBSCRIBE"</span>=&gt;<span class="number">8</span>,<span class="comment">//订阅请求</span></div><div class="line">	<span class="string">"MQTT_SUBACK"</span>=&gt;<span class="number">9</span>,<span class="comment">//订阅应答</span></div><div class="line">	<span class="string">"MQTT_UNSUBSCRIBE"</span>=&gt;<span class="number">10</span>,<span class="comment">//取消订阅</span></div><div class="line">	<span class="string">"MQTT_UNSUBACK"</span>=&gt;<span class="number">11</span>,<span class="comment">//取消订阅应答</span></div><div class="line">	<span class="string">"MQTT_PINGREQ"</span>=&gt;<span class="number">12</span>,<span class="comment">//ping请求</span></div><div class="line">	<span class="string">"MQTT_PINGRESP"</span>=&gt;<span class="number">13</span>,<span class="comment">//ping响应</span></div><div class="line">	<span class="string">"MQTT_DISCONNECT"</span>=&gt;<span class="number">14</span><span class="comment">//断开连接</span></div><div class="line">);</div></pre></td></tr></table></figure>
+<ol>
+<li>DUP flag</li>
+</ol>
+<p>用于保证在消息传输可靠的，如果设置为1，则在下面的变长头部里多加MessageId，并需要回复确认，保证消息传输完成，但不能用于检测消息重复发送。</p>
+<ol>
+<li>QoS</li>
+</ol>
+<p>主要用于publish（发布消息），保证消息传递的次数：</p>
+<ul>
+<li>00 表示最多一次 &lt;=1</li>
+<li>01 表示最少一次 &gt;=1</li>
+<li>10 表示仅有一次 ==1</li>
+<li>11 保留</li>
+</ul>
+<ol>
+<li>Retain </li>
+</ol>
+<p>主要用于publish（发布消息），表示服务器要保留这次推送的消息，如果有新的订阅者出现，就把这消息给它。如果不设，那么推送至当前订阅的就释放了。</p>
+<ol>
+<li>固定头部的byte 2</li>
+</ol>
+<p>是用来保存接下去的变长头部+消息体的总大小的。</p>
+<p>但是不是并不是直接保存的，同样也是可以扩展的，其机制是，前7位用于保存长度，后1位用作标识。</p>
+<p>举例：如果计算出后面的大小为0&lt;length&lt;=127的，正常保存，<br>如果计算127&lt;length&lt;16383的，则需要两个字节保存，将第一个字节的最大一个位置1，表示未完。然后第二个字节继续存。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/19/android-mobile-as-pc-sound.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1488,7 +1669,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1501,7 +1682,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
