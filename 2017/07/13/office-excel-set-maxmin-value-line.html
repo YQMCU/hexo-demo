@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="比如要设置A1:F1这样区域中的值，首先需要选中这个区域 然后 添加条件格式 - 公式 写入公式 =(A1=MIN($A1:$F1))*(A1&amp;lt;&amp;gt;&amp;quot;&amp;quot;) 用于设置最小值的规则，选择红色填充。 依样，添加条件格式 - 公式 =(A1=MAX($A1:$F1))*(A1&amp;lt;&amp;gt;&amp;quot;&amp;quot;) 用于设置最大值的规则，选择绿色填充。 点击确定，即可。">
+<meta name="description" content="方法比如要设置B2:Q2这样区域中的值，首先需要选中这个区域 然后 添加条件格式 - 公式 写入公式 =(B2=MIN($B2:$Q2))*(B2&amp;lt;&amp;gt;&amp;quot;&amp;quot;) 用于设置最小值的规则，选择红色填充。 依样，添加条件格式 - 公式 =(B2=MAX($B2:$Q2))*(B2&amp;lt;&amp;gt;&amp;quot;&amp;quot;) 用于设置最大值的规则，选择绿色填充。 点击确定，即可。">
 <meta name="keywords" content="office,excle,skill">
 <meta property="og:type" content="article">
 <meta property="og:title" content="office excel文件中批量设置选中区域的每行最值为不同颜色">
 <meta property="og:url" content="http://yoursite.com/2017/07/13/office-excel-set-maxmin-value-line.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
-<meta property="og:description" content="比如要设置A1:F1这样区域中的值，首先需要选中这个区域 然后 添加条件格式 - 公式 写入公式 =(A1=MIN($A1:$F1))*(A1&amp;lt;&amp;gt;&amp;quot;&amp;quot;) 用于设置最小值的规则，选择红色填充。 依样，添加条件格式 - 公式 =(A1=MAX($A1:$F1))*(A1&amp;lt;&amp;gt;&amp;quot;&amp;quot;) 用于设置最大值的规则，选择绿色填充。 点击确定，即可。">
-<meta property="og:updated_time" content="2017-07-13T06:34:45.498Z">
+<meta property="og:description" content="方法比如要设置B2:Q2这样区域中的值，首先需要选中这个区域 然后 添加条件格式 - 公式 写入公式 =(B2=MIN($B2:$Q2))*(B2&amp;lt;&amp;gt;&amp;quot;&amp;quot;) 用于设置最小值的规则，选择红色填充。 依样，添加条件格式 - 公式 =(B2=MAX($B2:$Q2))*(B2&amp;lt;&amp;gt;&amp;quot;&amp;quot;) 用于设置最大值的规则，选择绿色填充。 点击确定，即可。">
+<meta property="og:updated_time" content="2017-07-14T00:32:56.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="office excel文件中批量设置选中区域的每行最值为不同颜色">
-<meta name="twitter:description" content="比如要设置A1:F1这样区域中的值，首先需要选中这个区域 然后 添加条件格式 - 公式 写入公式 =(A1=MIN($A1:$F1))*(A1&amp;lt;&amp;gt;&amp;quot;&amp;quot;) 用于设置最小值的规则，选择红色填充。 依样，添加条件格式 - 公式 =(A1=MAX($A1:$F1))*(A1&amp;lt;&amp;gt;&amp;quot;&amp;quot;) 用于设置最大值的规则，选择绿色填充。 点击确定，即可。">
+<meta name="twitter:description" content="方法比如要设置B2:Q2这样区域中的值，首先需要选中这个区域 然后 添加条件格式 - 公式 写入公式 =(B2=MIN($B2:$Q2))*(B2&amp;lt;&amp;gt;&amp;quot;&amp;quot;) 用于设置最小值的规则，选择红色填充。 依样，添加条件格式 - 公式 =(B2=MAX($B2:$Q2))*(B2&amp;lt;&amp;gt;&amp;quot;&amp;quot;) 用于设置最大值的规则，选择绿色填充。 点击确定，即可。">
 
 
 
@@ -321,14 +321,15 @@
       
 
       
-        <p>比如要设置A1:F1这样区域中的值，首先需要选中这个区域</p>
+        <h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>比如要设置B2:Q2这样区域中的值，首先需要选中这个区域</p>
 <p>然后 添加条件格式 - 公式</p>
-<p>写入公式 <code>=(A1=MIN($A1:$F1))*(A1&lt;&gt;&quot;&quot;)</code></p>
+<p>写入公式 <code>=(B2=MIN($B2:$Q2))*(B2&lt;&gt;&quot;&quot;)</code></p>
 <p>用于设置最小值的规则，选择红色填充。</p>
 <p>依样，添加条件格式 - 公式</p>
-<p><code>=(A1=MAX($A1:$F1))*(A1&lt;&gt;&quot;&quot;)</code></p>
+<p><code>=(B2=MAX($B2:$Q2))*(B2&lt;&gt;&quot;&quot;)</code></p>
 <p>用于设置最大值的规则，选择绿色填充。</p>
 <p>点击确定，即可。</p>
+<h1 id="公式解析"><a href="#公式解析" class="headerlink" title="公式解析"></a>公式解析</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">= 代表使用公式</div><div class="line"></div><div class="line">(B2=MIN($B2:$Q2)) 代表满足条件其一</div><div class="line"></div><div class="line">* 代表与逻辑 同时满足两个条件</div><div class="line"></div><div class="line">(B2&lt;&gt;&quot;&quot;) 代表满足条件其二</div><div class="line"></div><div class="line">B2 = MIN()  代表B2:Q2 这一行区域中的某的某值等于最小值</div><div class="line"></div><div class="line">MIN($B2:$Q2) 代表 B2:Q2 这一行区域中的最小值</div><div class="line"></div><div class="line">B2&lt;&gt;&quot;&quot; 代表所求值不为空</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -430,8 +431,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -484,6 +494,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#方法"><span class="nav-number">1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#公式解析"><span class="nav-number">2.</span> <span class="nav-text">公式解析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
