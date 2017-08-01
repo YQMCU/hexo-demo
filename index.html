@@ -254,6 +254,118 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/01/ajax-getprice.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="缘起花渊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YQMCU's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/01/ajax-getprice.html" itemprop="url">ajax获取上证指数并显示出来</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-01T09:28:44+08:00">
+                2017-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">    #codes&#123;</div><div class="line">      width: 80%;</div><div class="line">    &#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test-jsonp"</span>&gt;</span></div><div class="line">      当前价格:<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000001"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000001"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000002"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000002"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000003"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000003"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000004"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000004"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000005"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000005"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000006"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000006"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000007"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000007"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000008"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000008"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000009"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000009"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test-create"</span>&gt;</span>当前价格：<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"getPrice()"</span>&gt;</span>刷新<span class="tag">&lt;/<span class="name">button</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">'codes'</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">"0000001,0000002,0000003,0000004,0000005,0000006,0000007,0000008,0000009"</span> <span class="attr">placeholder</span>=<span class="string">"code is here"</span> /&gt;</span> <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"create()"</span>&gt;</span>动态生成<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="xml"></span></div><div class="line">//&lt;![CDATA[</div><div class="line">    </div><div class="line">    var names = $('#test-jsonp span.name');</div><div class="line">    var prices = $('#test-jsonp span.price');</div><div class="line">    var code = "";</div><div class="line">   function render(data)&#123;</div><div class="line">    names.each(function(index)&#123;</div><div class="line">      $(this).text(data[$(this).attr('data-code')].name+':');</div><div class="line">      if(index == names.length-1)&#123;</div><div class="line">        $(this).next().text(data[$(this).attr('data-code')].price);</div><div class="line">      &#125;else&#123;</div><div class="line">        $(this).next().text(data[$(this).attr('data-code')].price+',');</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   function getPrice()&#123;</div><div class="line">    code = "";</div><div class="line">    names.each(function()&#123;</div><div class="line">      code += $(this).attr('data-code')+',';</div><div class="line">    &#125;);</div><div class="line">    code = code.substring(0,code.length-1);</div><div class="line">    console.log(code);</div><div class="line">    $.ajax(&#123;</div><div class="line">      type:'GET',</div><div class="line">      url:'http://api.money.126.net/data/feed/'+code,</div><div class="line">      dataType:'JSONP',</div><div class="line">      success:function(data)&#123;</div><div class="line">        console.log(data);</div><div class="line">        render(data);</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">   &#125;</div><div class="line"></div><div class="line">  function append(data)&#123;</div><div class="line">        // 清空数据</div><div class="line">      $('#test-create').empty();</div><div class="line">      $('#test-create').append('当前价格:');</div><div class="line">      $.each(data,function(key,val)&#123;</div><div class="line">        $('&lt;span&gt;&lt;\/span&gt;').attr(&#123;'class':'name','data-code':key&#125;).text(val.name+':').appendTo($('#test-create')); // </div><div class="line">        $('&lt;span&gt;&lt;\/span&gt;').attr(&#123;'class':'price','data-code':key&#125;).text(val.price+',').appendTo($('#test-create'));</div><div class="line">      &#125;)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function create()&#123;</div><div class="line">      var codes = $('#codes').val();</div><div class="line">      $.ajax(&#123;</div><div class="line">        type:'GET',</div><div class="line">        url:'http://api.money.126.net/data/feed/'+codes,</div><div class="line">        dataType:'JSONP',</div><div class="line">        success:function(data)&#123;</div><div class="line">          console.log(data);</div><div class="line">          append(data);</div><div class="line">        &#125;</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">  //]]&gt;</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/22/centos-install-mysql-by-sources.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -791,159 +903,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/30/nodejs-tcp-net.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="缘起花渊">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YQMCU's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/30/nodejs-tcp-net.html" itemprop="url">node.js TCP编程 - net模块</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-30T14:20:50+08:00">
-                2017-06-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Node.js Net 模块提供了一些用于底层的网络通信的小工具，包含了创建服务器/客户端的方法，我们可以通过以下方式引入该模块：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>)</div></pre></td></tr></table></figure></p>
-<p>做node服务端编程，net基本是绕不开的一个模块。</p>
-<p>从组成来看，net模块主要包含两部分，了解socket编程的同学应该比较熟悉了：</p>
-<ul>
-<li>net.Server：TCP server，内部通过socket来实现与客户端的通信。</li>
-<li>net.Socket：tcp/本地 socket的node版实现，它实现了全双工的stream接口。</li>
-</ul>
-<h1 id="简单的C-S-client-server-Demo"><a href="#简单的C-S-client-server-Demo" class="headerlink" title="简单的C/S(client/server)Demo"></a>简单的C/S(client/server)Demo</h1><p>tcp服务端程序：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> PORT = <span class="number">3000</span>;</div><div class="line"><span class="keyword">var</span> HOST = <span class="string">'127.0.0.1'</span>;</div><div class="line"> </div><div class="line"><span class="comment">// tcp服务端</span></div><div class="line"><span class="keyword">var</span> server = net.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">socket</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'服务端：收到来自客户端的请求'</span>);</div><div class="line"> </div><div class="line">    socket.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'服务端：收到客户端数据，内容为&#123;'</span>+ data +<span class="string">'&#125;'</span>);</div><div class="line"> </div><div class="line">        <span class="comment">// 给客户端返回数据</span></div><div class="line">        socket.write(<span class="string">'你好，我是服务端'</span>);</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    socket.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">         <span class="built_in">console</span>.log(<span class="string">'服务端：客户端连接断开'</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line">server.listen(PORT, HOST, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'服务端：开始监听来自客户端的请求'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>tcp客户端</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> PORT = <span class="number">3000</span>;</div><div class="line"><span class="keyword">var</span> HOST = <span class="string">'127.0.0.1'</span>;</div><div class="line"> </div><div class="line"><span class="comment">// tcp客户端</span></div><div class="line"><span class="keyword">var</span> client = net.createConnection(PORT, HOST);</div><div class="line"> </div><div class="line">client.on(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端：已经与服务端建立连接'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">client.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端：收到服务端数据，内容为&#123;'</span>+ data +<span class="string">'&#125;'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">client.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端：连接断开'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">client.end(<span class="string">'你好，我是客户端'</span>);</div></pre></td></tr></table></figure>
-<p>服务端：<br>服务端：开始监听来自客户端的请求<br>服务端：收到来自客户端的请求<br>服务端：收到客户端数据，内容为{你好，我是客户端}<br>服务端：客户端连接断开</p>
-<p>客户端：<br>客户端：已经与服务端建立连接<br>客户端：收到服务端数据，内容为{你好，我是服务端}<br>客户端：连接断开</p>
-<p>事件 listening/connection/close/error</p>
-<p>listening：调用 server.listen()，正式开始监听请求的时候触发。</p>
-<p>connection：当有新的请求进来时触发，参数为请求相关的 socket。</p>
-<p>close：服务端关闭的时候触发。</p>
-<p>error：服务出错的时候触发，比如监听了已经被占用的端口。</p>
-<p>API、属性归类<br>以下对net.Socket的API跟属性，按照用途进行了大致的分类，方便读者更好的理解。大部分API跟属性都比较简单，看下文档就知道做什么的，这里就先不展开。</p>
-<p>连接相关</p>
-<p>socket.connect()：有3种不同的参数，用于不同的场景；</p>
-<p>socket.setTimeout()：用来进行连接超时设置。</p>
-<p>socket.setKeepAlive()：用来设置长连接。</p>
-<p>socket.destroy(）、socket.destroyed：当错误发生时，用来销毁socket，确保这个socket上不会再有其他的IO操作。</p>
-<p>数据读、写相关</p>
-<p>socket.write()、socket.end()、socket.pause()、socket.resume()、socket.setEncoding()、socket.setNoDelay()</p>
-<p>数据属性相关</p>
-<p>socket.bufferSize、socket.bytesRead、socket.bytesWritten</p>
-<p>事件循环相关</p>
-<p>socket.ref()、socket.unref()</p>
-<p>地址相关</p>
-<p>socket.address()</p>
-<p>socket.remoteAddress、socket.remoteFamily、socket.remotePort</p>
-<p>socket.localAddress/socket.localPort</p>
-<p>事件简介<br>data：当收到另一侧传来的数据时触发。</p>
-<p>connect：当连接建立时触发。</p>
-<p>close：连接断开时触发。如果是因为传输错误导致的连接断开，则参数为error。</p>
-<p>end：当连接另一侧发送了 FIN 包的时候触发（读者可以回顾下HTTP如何断开连接的）。默认情况下（allowHalfOpen == false），socket会完成自我销毁操作。但你也可以把 allowHalfOpen 设置为 true，这样就可以继续往socket里写数据。当然，最后你需要手动调用 socket.end()</p>
-<p>error：当有错误发生时，就会触发，参数为error。（官方文档基本一句话带过，不过考虑到出错的可能太多，也可以理解）</p>
-<p>timeout：提示用户，socket 已经超时，需要手动关闭连接。</p>
-<p>drain：当写缓存空了的时候触发。（不是很好描述，具体可以看下stream的介绍）</p>
-<p>lookup：域名解析完成时触发。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/30/nodejs_module_mysql.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1112,6 +1071,159 @@
 <h3 id="U-read-查"><a href="#U-read-查" class="headerlink" title="U:read 查"></a>U:read 查</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span>  sql = <span class="string">'SELECT * FROM websites'</span>;</div><div class="line"><span class="comment">//查</span></div><div class="line">connection.query(sql,<span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(err)&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">'[SELECT ERROR] - '</span>,err.message);</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'--------------------------SELECT----------------------------'</span>);</div><div class="line">       <span class="built_in">console</span>.log(result);</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'------------------------------------------------------------\n\n'</span>);  </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="U-read-查-1"><a href="#U-read-查-1" class="headerlink" title="U:read 查"></a>U:read 查</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span>  sql = <span class="string">'SELECT * FROM websites'</span>;</div><div class="line"><span class="comment">//查</span></div><div class="line">connection.query(sql,<span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(err)&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">'[SELECT ERROR] - '</span>,err.message);</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'--------------------------SELECT----------------------------'</span>);</div><div class="line">       <span class="built_in">console</span>.log(result);</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'------------------------------------------------------------\n\n'</span>);  </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="U-delete-删"><a href="#U-delete-删" class="headerlink" title="U:delete 删"></a>U:delete 删</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mysql  = <span class="built_in">require</span>(<span class="string">'mysql'</span>);  </div><div class="line"> </div><div class="line"><span class="keyword">var</span> connection = mysql.createConnection(&#123;     </div><div class="line">  <span class="attr">host</span>     : <span class="string">'localhost'</span>,       </div><div class="line">  <span class="attr">user</span>     : <span class="string">'root'</span>,              </div><div class="line">  <span class="attr">password</span> : <span class="string">'123456'</span>,       </div><div class="line">  <span class="attr">port</span>: <span class="string">'3306'</span>,                   </div><div class="line">  <span class="attr">database</span>: <span class="string">'test'</span>, </div><div class="line">&#125;); </div><div class="line"> </div><div class="line">connection.connect();</div><div class="line"> </div><div class="line"><span class="keyword">var</span> delSql = <span class="string">'DELETE FROM websites where id=6'</span>;</div><div class="line"><span class="comment">//删</span></div><div class="line">connection.query(delSql,<span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(err)&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">'[DELETE ERROR] - '</span>,err.message);</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">        &#125;        </div><div class="line"> </div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'--------------------------DELETE----------------------------'</span>);</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'DELETE affectedRows'</span>,result.affectedRows);</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'-----------------------------------------------------------------\n\n'</span>);  </div><div class="line">&#125;);</div><div class="line"> </div><div class="line">connection.end();</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/30/nodejs-tcp-net.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="缘起花渊">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YQMCU's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/30/nodejs-tcp-net.html" itemprop="url">node.js TCP编程 - net模块</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-30T14:20:50+08:00">
+                2017-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Node.js Net 模块提供了一些用于底层的网络通信的小工具，包含了创建服务器/客户端的方法，我们可以通过以下方式引入该模块：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>)</div></pre></td></tr></table></figure></p>
+<p>做node服务端编程，net基本是绕不开的一个模块。</p>
+<p>从组成来看，net模块主要包含两部分，了解socket编程的同学应该比较熟悉了：</p>
+<ul>
+<li>net.Server：TCP server，内部通过socket来实现与客户端的通信。</li>
+<li>net.Socket：tcp/本地 socket的node版实现，它实现了全双工的stream接口。</li>
+</ul>
+<h1 id="简单的C-S-client-server-Demo"><a href="#简单的C-S-client-server-Demo" class="headerlink" title="简单的C/S(client/server)Demo"></a>简单的C/S(client/server)Demo</h1><p>tcp服务端程序：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> PORT = <span class="number">3000</span>;</div><div class="line"><span class="keyword">var</span> HOST = <span class="string">'127.0.0.1'</span>;</div><div class="line"> </div><div class="line"><span class="comment">// tcp服务端</span></div><div class="line"><span class="keyword">var</span> server = net.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">socket</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'服务端：收到来自客户端的请求'</span>);</div><div class="line"> </div><div class="line">    socket.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'服务端：收到客户端数据，内容为&#123;'</span>+ data +<span class="string">'&#125;'</span>);</div><div class="line"> </div><div class="line">        <span class="comment">// 给客户端返回数据</span></div><div class="line">        socket.write(<span class="string">'你好，我是服务端'</span>);</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    socket.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">         <span class="built_in">console</span>.log(<span class="string">'服务端：客户端连接断开'</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line">server.listen(PORT, HOST, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'服务端：开始监听来自客户端的请求'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>tcp客户端</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> PORT = <span class="number">3000</span>;</div><div class="line"><span class="keyword">var</span> HOST = <span class="string">'127.0.0.1'</span>;</div><div class="line"> </div><div class="line"><span class="comment">// tcp客户端</span></div><div class="line"><span class="keyword">var</span> client = net.createConnection(PORT, HOST);</div><div class="line"> </div><div class="line">client.on(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端：已经与服务端建立连接'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">client.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端：收到服务端数据，内容为&#123;'</span>+ data +<span class="string">'&#125;'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">client.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端：连接断开'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">client.end(<span class="string">'你好，我是客户端'</span>);</div></pre></td></tr></table></figure>
+<p>服务端：<br>服务端：开始监听来自客户端的请求<br>服务端：收到来自客户端的请求<br>服务端：收到客户端数据，内容为{你好，我是客户端}<br>服务端：客户端连接断开</p>
+<p>客户端：<br>客户端：已经与服务端建立连接<br>客户端：收到服务端数据，内容为{你好，我是服务端}<br>客户端：连接断开</p>
+<p>事件 listening/connection/close/error</p>
+<p>listening：调用 server.listen()，正式开始监听请求的时候触发。</p>
+<p>connection：当有新的请求进来时触发，参数为请求相关的 socket。</p>
+<p>close：服务端关闭的时候触发。</p>
+<p>error：服务出错的时候触发，比如监听了已经被占用的端口。</p>
+<p>API、属性归类<br>以下对net.Socket的API跟属性，按照用途进行了大致的分类，方便读者更好的理解。大部分API跟属性都比较简单，看下文档就知道做什么的，这里就先不展开。</p>
+<p>连接相关</p>
+<p>socket.connect()：有3种不同的参数，用于不同的场景；</p>
+<p>socket.setTimeout()：用来进行连接超时设置。</p>
+<p>socket.setKeepAlive()：用来设置长连接。</p>
+<p>socket.destroy(）、socket.destroyed：当错误发生时，用来销毁socket，确保这个socket上不会再有其他的IO操作。</p>
+<p>数据读、写相关</p>
+<p>socket.write()、socket.end()、socket.pause()、socket.resume()、socket.setEncoding()、socket.setNoDelay()</p>
+<p>数据属性相关</p>
+<p>socket.bufferSize、socket.bytesRead、socket.bytesWritten</p>
+<p>事件循环相关</p>
+<p>socket.ref()、socket.unref()</p>
+<p>地址相关</p>
+<p>socket.address()</p>
+<p>socket.remoteAddress、socket.remoteFamily、socket.remotePort</p>
+<p>socket.localAddress/socket.localPort</p>
+<p>事件简介<br>data：当收到另一侧传来的数据时触发。</p>
+<p>connect：当连接建立时触发。</p>
+<p>close：连接断开时触发。如果是因为传输错误导致的连接断开，则参数为error。</p>
+<p>end：当连接另一侧发送了 FIN 包的时候触发（读者可以回顾下HTTP如何断开连接的）。默认情况下（allowHalfOpen == false），socket会完成自我销毁操作。但你也可以把 allowHalfOpen 设置为 true，这样就可以继续往socket里写数据。当然，最后你需要手动调用 socket.end()</p>
+<p>error：当有错误发生时，就会触发，参数为error。（官方文档基本一句话带过，不过考虑到出错的可能太多，也可以理解）</p>
+<p>timeout：提示用户，socket 已经超时，需要手动关闭连接。</p>
+<p>drain：当写缓存空了的时候触发。（不是很好描述，具体可以看下stream的介绍）</p>
+<p>lookup：域名解析完成时触发。</p>
+
           
         
       
@@ -1620,128 +1732,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/23/modbus-funccode.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="缘起花渊">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YQMCU's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/23/modbus-funccode.html" itemprop="url">modbus_funccode</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-23T16:36:37+08:00">
-                2017-06-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>01 读取线圈状态<br>发送：</li>
-</ol>
-<p>项目|字节数|示例<br>功能代码|1|01<br>起始地址|2|FFFF<br>线圈数量|2|7D0</p>
-<p>接收：</p>
-<p>项目<br>功能代码</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1786,7 +1781,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1799,7 +1794,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
