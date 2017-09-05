@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,7 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
 
@@ -21,6 +22,7 @@
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
 
 
 
@@ -74,7 +76,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Markdown,编程,语法," />
@@ -86,7 +88,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -97,11 +99,12 @@
 <meta name="keywords" content="Markdown,编程,语法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="markdown语法参考">
-<meta property="og:url" content="http://yoursite.com/2017/06/19/Markdown Reference.html">
+<meta property="og:url" content="http://yoursite.com/2017/06/19/MarkdownReference.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
 <meta property="og:description" content="MarkDown语法中文参考翻译整理：Peven 配合Typora食用更佳  概述MarkDown由Daring Fireball设计开发，其最原始的指导文档请看这里。MarkDown的语法，在不同的解释器或者编辑器里各有不同。Typora使用 [GitHub Flavored Markdown][GFM]。  大纲 [TOC] 块级元素段落及行换行使用Enter键即可创建新段落 标题标题使用和在">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://typora.io/img/drag-img.gif">
-<meta property="og:updated_time" content="2017-06-20T00:53:51.663Z">
+<meta property="og:updated_time" content="2017-08-24T04:33:30.061Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="markdown语法参考">
 <meta name="twitter:description" content="MarkDown语法中文参考翻译整理：Peven 配合Typora食用更佳  概述MarkDown由Daring Fireball设计开发，其最原始的指导文档请看这里。MarkDown的语法，在不同的解释器或者编辑器里各有不同。Typora使用 [GitHub Flavored Markdown][GFM]。  大纲 [TOC] 块级元素段落及行换行使用Enter键即可创建新段落 标题标题使用和在">
@@ -114,9 +117,11 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -133,17 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/06/19/Markdown Reference.html"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/19/MarkdownReference.html"/>
 
 
 
 
 
   <title>markdown语法参考 | YQMCU's Blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
@@ -153,19 +154,16 @@
 
 
 
+</head>
 
-
-
-
-
-
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -211,22 +209,22 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
           </a>
         </li>
       
@@ -258,8 +256,12 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/19/Markdown Reference.html">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/19/MarkdownReference.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="缘起花渊">
@@ -317,6 +319,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -361,7 +366,7 @@
 <h3 id="水平分割线"><a href="#水平分割线" class="headerlink" title="水平分割线"></a>水平分割线</h3><p>在空行输入<code>***</code>或者<code>---</code> 并按回车即可画出一条水平分割线：</p>
 <hr>
 <h3 id="YAML-前端块"><a href="#YAML-前端块" class="headerlink" title="YAML 前端块"></a>YAML 前端块</h3><p>Typora已经支持 <a href="http://jekyllrb.com/docs/frontmatter/" target="_blank" rel="external">YAML Front Matters</a> ,在md文档顶部输入<code>---</code>即可，例如：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="section">#以下代码应放置在文档头部</span></div><div class="line">---</div><div class="line">layout: post</div><div class="line"><span class="section">title: Blogging Like a Hacker</span></div><div class="line">---</div></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="section">#以下代码应放置在文档头部</span></div><div class="line">---</div><div class="line">layout: post</div><div class="line">title: Blogging Like a Hacker</div><div class="line">---</div></pre></td></tr></table></figure>
 <p>PS:包含<a href="http://yaml.org/" target="_blank" rel="external">YAML</a>前端块的任何文件将由Jekyll作为特殊文件处理。</p>
 <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>输入<code>[toc]</code>,md会自动根据全文标题进行目录排版</p>
 <p>例如：</p>
@@ -408,27 +413,15 @@
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -472,6 +465,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -505,6 +502,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -522,20 +520,19 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="缘起花渊" />
-          <p class="site-author-name" itemprop="name">缘起花渊</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
           
+            <p class="site-author-name" itemprop="name">缘起花渊</p>
+            <p class="site-description motion-element" itemprop="description"></p>
         </div>
+
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
+            
               <a href="/archives/">
-                <span class="site-state-item-count">23</span>
+            
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -548,7 +545,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -611,22 +608,25 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">缘起花渊</span>
+
+  
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
 
 
         
+
+
+
+
+
+
 
         
       </div>
@@ -692,25 +692,29 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 
@@ -737,10 +741,6 @@
   
 
 
-
-
-
-  
 
 
 

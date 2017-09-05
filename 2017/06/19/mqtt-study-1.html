@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,7 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
 
@@ -21,6 +22,7 @@
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
 
 
 
@@ -74,19 +76,19 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="通讯,物联网,网络," />
-
-
-
+  <meta name="keywords" content="物联网,通讯,网络," />
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -94,13 +96,14 @@
 
 
 <meta name="description" content="MQTT(Message Queuing Telemetry Transport,消息队列遥测传输协议)，是一种基于发布/订阅(publish/subscribe)模式的轻量级通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。 MQTT最大的优点在于，可以以极少的代码和优先的带宽，为连接远程设备提供实时可靠的消息服务。 作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型">
-<meta name="keywords" content="通讯,物联网,网络">
+<meta name="keywords" content="物联网,通讯,网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MQTT折腾记录(1) -- MQTT初探">
 <meta property="og:url" content="http://yoursite.com/2017/06/19/mqtt-study-1.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
 <meta property="og:description" content="MQTT(Message Queuing Telemetry Transport,消息队列遥测传输协议)，是一种基于发布/订阅(publish/subscribe)模式的轻量级通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。 MQTT最大的优点在于，可以以极少的代码和优先的带宽，为连接远程设备提供实时可靠的消息服务。 作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型">
-<meta property="og:updated_time" content="2017-06-19T04:43:44.796Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-24T04:33:30.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MQTT折腾记录(1) -- MQTT初探">
 <meta name="twitter:description" content="MQTT(Message Queuing Telemetry Transport,消息队列遥测传输协议)，是一种基于发布/订阅(publish/subscribe)模式的轻量级通讯协议，该协议构建于TCP/IP协议上，由IBM在1999年发布。 MQTT最大的优点在于，可以以极少的代码和优先的带宽，为连接远程设备提供实时可靠的消息服务。 作为一种低开销、低带宽占用的即时通讯协议，使其在物联网、小型">
@@ -112,9 +115,11 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -138,10 +143,6 @@
 
 
   <title>MQTT折腾记录(1) -- MQTT初探 | YQMCU's Blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
@@ -151,19 +152,16 @@
 
 
 
+</head>
 
-
-
-
-
-
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -209,22 +207,22 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
           </a>
         </li>
       
@@ -256,7 +254,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/19/mqtt-study-1.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -315,6 +317,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -384,35 +389,23 @@
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/通讯/" rel="tag"># 通讯</a>
-          
             <a href="/tags/物联网/" rel="tag"># 物联网</a>
+          
+            <a href="/tags/通讯/" rel="tag"># 通讯</a>
           
             <a href="/tags/网络/" rel="tag"># 网络</a>
           
@@ -448,6 +441,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -481,6 +478,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -498,20 +496,19 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="缘起花渊" />
-          <p class="site-author-name" itemprop="name">缘起花渊</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
           
+            <p class="site-author-name" itemprop="name">缘起花渊</p>
+            <p class="site-description motion-element" itemprop="description"></p>
         </div>
+
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
+            
               <a href="/archives/">
-                <span class="site-state-item-count">23</span>
+            
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -524,7 +521,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -587,22 +584,25 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">缘起花渊</span>
+
+  
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
 
 
         
+
+
+
+
+
+
 
         
       </div>
@@ -668,25 +668,29 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 
@@ -713,10 +717,6 @@
   
 
 
-
-
-
-  
 
 
 

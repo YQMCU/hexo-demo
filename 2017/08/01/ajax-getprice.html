@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,7 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
 
@@ -21,6 +22,7 @@
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
 
 
 
@@ -74,7 +76,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="ajax,technology,web," />
@@ -86,7 +88,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -100,7 +102,8 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/01/ajax-getprice.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
 <meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101&amp;lt;h">
-<meta property="og:updated_time" content="2017-08-01T01:30:57.871Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-24T04:33:29.983Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ajax获取上证指数并显示出来">
 <meta name="twitter:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101&amp;lt;h">
@@ -112,9 +115,11 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -138,10 +143,6 @@
 
 
   <title>ajax获取上证指数并显示出来 | YQMCU's Blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
@@ -151,19 +152,16 @@
 
 
 
+</head>
 
-
-
-
-
-
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -209,22 +207,22 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
           </a>
         </li>
       
@@ -256,7 +254,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/01/ajax-getprice.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -315,37 +317,28 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line">    #codes&#123;</div><div class="line">      width: 80%;</div><div class="line">    &#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test-jsonp"</span>&gt;</span></div><div class="line">      当前价格:<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000001"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000001"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000002"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000002"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000003"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000003"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000004"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000004"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000005"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000005"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000006"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000006"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000007"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000007"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000008"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000008"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000009"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000009"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test-create"</span>&gt;</span>当前价格：<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"getPrice()"</span>&gt;</span>刷新<span class="tag">&lt;/<span class="name">button</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">'codes'</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">"0000001,0000002,0000003,0000004,0000005,0000006,0000007,0000008,0000009"</span> <span class="attr">placeholder</span>=<span class="string">"code is here"</span> /&gt;</span> <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"create()"</span>&gt;</span>动态生成<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="xml"></span></div><div class="line">//&lt;![CDATA[</div><div class="line">    </div><div class="line">    var names = $('#test-jsonp span.name');</div><div class="line">    var prices = $('#test-jsonp span.price');</div><div class="line">    var code = "";</div><div class="line">   function render(data)&#123;</div><div class="line">    names.each(function(index)&#123;</div><div class="line">      $(this).text(data[$(this).attr('data-code')].name+':');</div><div class="line">      if(index == names.length-1)&#123;</div><div class="line">        $(this).next().text(data[$(this).attr('data-code')].price);</div><div class="line">      &#125;else&#123;</div><div class="line">        $(this).next().text(data[$(this).attr('data-code')].price+',');</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   function getPrice()&#123;</div><div class="line">    code = "";</div><div class="line">    names.each(function()&#123;</div><div class="line">      code += $(this).attr('data-code')+',';</div><div class="line">    &#125;);</div><div class="line">    code = code.substring(0,code.length-1);</div><div class="line">    console.log(code);</div><div class="line">    $.ajax(&#123;</div><div class="line">      type:'GET',</div><div class="line">      url:'http://api.money.126.net/data/feed/'+code,</div><div class="line">      dataType:'JSONP',</div><div class="line">      success:function(data)&#123;</div><div class="line">        console.log(data);</div><div class="line">        render(data);</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">   &#125;</div><div class="line"></div><div class="line">  function append(data)&#123;</div><div class="line">        // 清空数据</div><div class="line">      $('#test-create').empty();</div><div class="line">      $('#test-create').append('当前价格:');</div><div class="line">      $.each(data,function(key,val)&#123;</div><div class="line">        $('&lt;span&gt;&lt;\/span&gt;').attr(&#123;'class':'name','data-code':key&#125;).text(val.name+':').appendTo($('#test-create')); // </div><div class="line">        $('&lt;span&gt;&lt;\/span&gt;').attr(&#123;'class':'price','data-code':key&#125;).text(val.price+',').appendTo($('#test-create'));</div><div class="line">      &#125;)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function create()&#123;</div><div class="line">      var codes = $('#codes').val();</div><div class="line">      $.ajax(&#123;</div><div class="line">        type:'GET',</div><div class="line">        url:'http://api.money.126.net/data/feed/'+codes,</div><div class="line">        dataType:'JSONP',</div><div class="line">        success:function(data)&#123;</div><div class="line">          console.log(data);</div><div class="line">          append(data);</div><div class="line">        &#125;</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">  //]]&gt;</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+        <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined">    #codes&#123;</span></div><div class="line"><span class="undefined">      width: 80%;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test-jsonp"</span>&gt;</span></div><div class="line">      当前价格:<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000001"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000001"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000002"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000002"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000003"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000003"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000004"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000004"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000005"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000005"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000006"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000006"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000007"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000007"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000008"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000008"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">data-code</span>=<span class="string">"0000009"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"price"</span> <span class="attr">data-code</span>=<span class="string">"0000009"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test-create"</span>&gt;</span>当前价格：<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"getPrice()"</span>&gt;</span>刷新<span class="tag">&lt;/<span class="name">button</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">'codes'</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">"0000001,0000002,0000003,0000004,0000005,0000006,0000007,0000008,0000009"</span> <span class="attr">placeholder</span>=<span class="string">"code is here"</span> /&gt;</span> <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"create()"</span>&gt;</span>动态生成<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined">//&lt;![CDATA[</span></div><div class="line"><span class="undefined">    </span></div><div class="line"><span class="undefined">    var names = $('#test-jsonp span.name');</span></div><div class="line"><span class="undefined">    var prices = $('#test-jsonp span.price');</span></div><div class="line"><span class="undefined">    var code = "";</span></div><div class="line"><span class="undefined">   function render(data)&#123;</span></div><div class="line"><span class="undefined">    names.each(function(index)&#123;</span></div><div class="line"><span class="undefined">      $(this).text(data[$(this).attr('data-code')].name+':');</span></div><div class="line"><span class="undefined">      if(index == names.length-1)&#123;</span></div><div class="line"><span class="undefined">        $(this).next().text(data[$(this).attr('data-code')].price);</span></div><div class="line"><span class="undefined">      &#125;else&#123;</span></div><div class="line"><span class="undefined">        $(this).next().text(data[$(this).attr('data-code')].price+',');</span></div><div class="line"><span class="undefined">      &#125;</span></div><div class="line"><span class="undefined">    &#125;);</span></div><div class="line"><span class="undefined">   &#125;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="undefined">   function getPrice()&#123;</span></div><div class="line"><span class="undefined">    code = "";</span></div><div class="line"><span class="undefined">    names.each(function()&#123;</span></div><div class="line"><span class="undefined">      code += $(this).attr('data-code')+',';</span></div><div class="line"><span class="undefined">    &#125;);</span></div><div class="line"><span class="undefined">    code = code.substring(0,code.length-1);</span></div><div class="line"><span class="undefined">    console.log(code);</span></div><div class="line"><span class="undefined">    $.ajax(&#123;</span></div><div class="line"><span class="undefined">      type:'GET',</span></div><div class="line"><span class="undefined">      url:'http://api.money.126.net/data/feed/'+code,</span></div><div class="line"><span class="undefined">      dataType:'JSONP',</span></div><div class="line"><span class="undefined">      success:function(data)&#123;</span></div><div class="line"><span class="undefined">        console.log(data);</span></div><div class="line"><span class="undefined">        render(data);</span></div><div class="line"><span class="undefined">      &#125;</span></div><div class="line"><span class="undefined">    &#125;);</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="undefined">   &#125;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="undefined">  function append(data)&#123;</span></div><div class="line"><span class="undefined">        // 清空数据</span></div><div class="line"><span class="undefined">      $('#test-create').empty();</span></div><div class="line"><span class="undefined">      $('#test-create').append('当前价格:');</span></div><div class="line"><span class="undefined">      $.each(data,function(key,val)&#123;</span></div><div class="line"><span class="xml">        $('<span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">\</span>/<span class="attr">span</span>&gt;</span>').attr(&#123;'class':'name','data-code':key&#125;).text(val.name+':').appendTo($('#test-create')); // </span></div><div class="line"><span class="xml">        $('<span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">\</span>/<span class="attr">span</span>&gt;</span>').attr(&#123;'class':'price','data-code':key&#125;).text(val.price+',').appendTo($('#test-create'));</span></div><div class="line"><span class="undefined">      &#125;)</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="undefined">    function create()&#123;</span></div><div class="line"><span class="undefined">      var codes = $('#codes').val();</span></div><div class="line"><span class="undefined">      $.ajax(&#123;</span></div><div class="line"><span class="undefined">        type:'GET',</span></div><div class="line"><span class="undefined">        url:'http://api.money.126.net/data/feed/'+codes,</span></div><div class="line"><span class="undefined">        dataType:'JSONP',</span></div><div class="line"><span class="undefined">        success:function(data)&#123;</span></div><div class="line"><span class="undefined">          console.log(data);</span></div><div class="line"><span class="undefined">          append(data);</span></div><div class="line"><span class="undefined">        &#125;</span></div><div class="line"><span class="undefined">      &#125;);</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="undefined">  //]]&gt;</span></div><div class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -389,6 +382,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -422,6 +419,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -430,20 +428,19 @@
 
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="缘起花渊" />
-          <p class="site-author-name" itemprop="name">缘起花渊</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
           
+            <p class="site-author-name" itemprop="name">缘起花渊</p>
+            <p class="site-description motion-element" itemprop="description"></p>
         </div>
+
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
+            
               <a href="/archives/">
-                <span class="site-state-item-count">23</span>
+            
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -456,7 +453,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -503,22 +500,25 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">缘起花渊</span>
+
+  
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
 
 
         
+
+
+
+
+
+
 
         
       </div>
@@ -584,25 +584,29 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 
@@ -629,10 +633,6 @@
   
 
 
-
-
-
-  
 
 
 

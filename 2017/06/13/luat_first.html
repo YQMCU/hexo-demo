@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,7 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
 
@@ -21,6 +22,7 @@
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
 
 
 
@@ -74,7 +76,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="编程,技术,物联网,Luat," />
@@ -86,7 +88,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -100,7 +102,8 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/13/luat_first.html">
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
 <meta property="og:description" content="Lua模块应用程序开发架构各个功能在各个module中处理，官方称之为库函数(lib)。自开发用户需要自己创建一个main.lua主程序，运行也是从main开始的。main.lua是一个入口文件，且只能存在一个main.lua。 脚本在sys.run()中循环运行。 所以，sys模块的run()是主架构，这个主架构是用消息机制实现的。用户拿到这个架构可以根据自己的需求增加或修改对应的消息处理程序即">
-<meta property="og:updated_time" content="2017-06-15T03:10:24.258Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-24T04:33:30.045Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="luat first">
 <meta name="twitter:description" content="Lua模块应用程序开发架构各个功能在各个module中处理，官方称之为库函数(lib)。自开发用户需要自己创建一个main.lua主程序，运行也是从main开始的。main.lua是一个入口文件，且只能存在一个main.lua。 脚本在sys.run()中循环运行。 所以，sys模块的run()是主架构，这个主架构是用消息机制实现的。用户拿到这个架构可以根据自己的需求增加或修改对应的消息处理程序即">
@@ -112,9 +115,11 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
-    motion: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -138,10 +143,6 @@
 
 
   <title>luat first | YQMCU's Blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
@@ -151,19 +152,16 @@
 
 
 
+</head>
 
-
-
-
-
-
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -209,22 +207,22 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
           </a>
         </li>
       
@@ -256,7 +254,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/luat_first.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -315,6 +317,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -325,7 +330,7 @@
 <p>脚本在<code>sys.run()</code>中<strong>循环</strong>运行。</p>
 <p>所以，sys模块的run()是主架构，这个主架构是用消息机制实现的。用户拿到这个架构可以<strong>根据自己的需求增加或修改对应的消息处理程序即可实现所需的功能。</strong></p>
 <h3 id="main-lua-主程序"><a href="#main-lua-主程序" class="headerlink" title="main.lua 主程序"></a>main.lua 主程序</h3><p>main.lua是主程序模块，里面一般包括<code>Require程序</code>,<code>初始化程序</code>,<code>主循环程序</code></p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--[[</span></div><div class="line">用来加载使用到的module</div><div class="line">]]<span class="comment">--</span></div><div class="line"><span class="built_in">require</span> <span class="string">"lcd"</span></div><div class="line"><span class="built_in">require</span> <span class="string">"keypad"</span></div><div class="line"><span class="built_in">require</span> <span class="string">"idle"</span></div><div class="line"></div><div class="line"><span class="comment">--[[</span></div><div class="line">初始化，ATC口，物理UART口，GPIO，I2C口等的初始化在这里进行，只执行一次</div><div class="line">]]<span class="comment">--</span></div><div class="line">sys.init()</div><div class="line"></div><div class="line"><span class="comment">--[[</span></div><div class="line">主循环程序是个无限循环，放在sys.lua这个module中</div><div class="line">]]<span class="comment">--</span></div><div class="line">sys.run()</div></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--[[</span></div><div class="line"><span class="comment">用来加载使用到的module</span></div><div class="line"><span class="comment">]]</span><span class="comment">--</span></div><div class="line"><span class="built_in">require</span> <span class="string">"lcd"</span></div><div class="line"><span class="built_in">require</span> <span class="string">"keypad"</span></div><div class="line"><span class="built_in">require</span> <span class="string">"idle"</span></div><div class="line"></div><div class="line"><span class="comment">--[[</span></div><div class="line"><span class="comment">初始化，ATC口，物理UART口，GPIO，I2C口等的初始化在这里进行，只执行一次</span></div><div class="line"><span class="comment">]]</span><span class="comment">--</span></div><div class="line">sys.init()</div><div class="line"></div><div class="line"><span class="comment">--[[</span></div><div class="line"><span class="comment">主循环程序是个无限循环，放在sys.lua这个module中</span></div><div class="line"><span class="comment">]]</span><span class="comment">--</span></div><div class="line">sys.run()</div></pre></td></tr></table></figure>
 <h3 id="run-详解"><a href="#run-详解" class="headerlink" title="run()详解"></a>run()详解</h3><h4 id="1-该架构是用消息机制实现的"><a href="#1-该架构是用消息机制实现的" class="headerlink" title="1) 该架构是用消息机制实现的"></a>1) 该架构是用消息机制实现的</h4><p>运行框架基于消息处理机制，消息来源于内部消息和外部消息。</p>
 <p>内部消息：lua脚本调用本文件dispatch接口产生的消息，消息存储在qmsg表中。</p>
 <p>外部消息：底层core软件产生的消息，lua脚本通过rtos.receive接口读取这些外部消息。</p>
@@ -550,7 +555,7 @@
 <p>step1: URC处理程序<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">IdleUrc</span><span class="params">(data,prefix)</span></span></div><div class="line">	<span class="keyword">if</span> prefix == <span class="string">"+CPIN"</span> <span class="keyword">then</span></div><div class="line">		<span class="keyword">local</span> p = smatch(data,<span class="string">"NOT%s*INSERTED"</span>,<span class="built_in">string</span>.<span class="built_in">len</span>(prefix)+<span class="number">1</span>)</div><div class="line">		<span class="keyword">if</span> p <span class="keyword">then</span></div><div class="line">			pbapp.SetSim(<span class="literal">false</span>)</div><div class="line">		<span class="keyword">end</span></div><div class="line">		<span class="keyword">local</span> p = smatch(data,<span class="string">"READY"</span>,<span class="built_in">string</span>.<span class="built_in">len</span>(prefix)+<span class="number">1</span>)</div><div class="line">		<span class="keyword">if</span> p <span class="keyword">then</span> </div><div class="line">			pbapp.SetSim(<span class="literal">true</span>)</div><div class="line">		<span class="keyword">end</span>	</div><div class="line">	<span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
 <p>step2: 注册该程序<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ril.regurc(<span class="string">"+CPIN"</span>,IdleUrc)</div></pre></td></tr></table></figure></p>
 <h4 id="regrsp-用来注册AT命令处理程序"><a href="#regrsp-用来注册AT命令处理程序" class="headerlink" title="regrsp()用来注册AT命令处理程序"></a>regrsp()用来注册AT命令处理程序</h4><p>当用户发送AT命令时，一般是需要这些命令的返回结果的，<br>AT命令返回结果的处理程序app是通过regrsp()函数来注册的在rsptable表中的。<br>这样当发送AT命令时，会自动执行该处理程序处理AT命令返回结果。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- file in ril.lua</span></div><div class="line"><span class="comment">--[[ </span></div><div class="line"> para: </div><div class="line">	head : AT命令的头</div><div class="line">	func : 处理函数</div><div class="line">	typ : 命令的类型</div><div class="line">		0 : no result</div><div class="line">		1 : number</div><div class="line">		2 : sline</div><div class="line">		3 : mline</div><div class="line">		4 : string</div><div class="line">		10 : spec</div><div class="line"></div><div class="line">例如:</div><div class="line">	AT+CHFA? 这个获取音频通道命令的</div><div class="line">	head是+CHFA?，</div><div class="line">	fnc是AT命令结果处理程序</div><div class="line">	typ是2</div><div class="line"></div><div class="line">]]<span class="comment">--</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">regrsp</span><span class="params">(head,fnc,typ)</span></span></div><div class="line">	<span class="comment">-- funciton body</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- file in ril.lua</span></div><div class="line"><span class="comment">--[[ </span></div><div class="line"><span class="comment"> para: </span></div><div class="line"><span class="comment">	head : AT命令的头</span></div><div class="line"><span class="comment">	func : 处理函数</span></div><div class="line"><span class="comment">	typ : 命令的类型</span></div><div class="line"><span class="comment">		0 : no result</span></div><div class="line"><span class="comment">		1 : number</span></div><div class="line"><span class="comment">		2 : sline</span></div><div class="line"><span class="comment">		3 : mline</span></div><div class="line"><span class="comment">		4 : string</span></div><div class="line"><span class="comment">		10 : spec</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">例如:</span></div><div class="line"><span class="comment">	AT+CHFA? 这个获取音频通道命令的</span></div><div class="line"><span class="comment">	head是+CHFA?，</span></div><div class="line"><span class="comment">	fnc是AT命令结果处理程序</span></div><div class="line"><span class="comment">	typ是2</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">]]</span><span class="comment">--</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">regrsp</span><span class="params">(head,fnc,typ)</span></span></div><div class="line">	<span class="comment">-- funciton body</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
 <p>对AT命令的返回结果的处理，一般有两种情况：<br>1) 一些常用的AT命令的处理程序，库文件已经缺省用regrsp注册了。此时处理程序会把AT命令结果dispatch出来，后续再用regapp注册的app再做进一步处理（适用于异步处理或前后有因果关系的情况）<br>2) 如果AT命令在lib库文件中没有被regrsp注册过，则需要用regrsp()注册相应的处理程序。<br>此时用户可以在这些处理程序中直接处理AT命令返回结果（适用于同步处理），也可以用1的异步处理方式。</p>
 <p><strong>regrsp 处理流程如下：</strong></p>
 <p>1) 在脚本某处regrsp(head,fnc,typ)，将处理函数func的地址注册在rsptable表中，表的key是head(AT命令返回结果的前缀，比如+CSQ)</p>
@@ -563,27 +568,15 @@
 
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -629,6 +622,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -662,6 +659,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -679,20 +677,19 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="缘起花渊" />
-          <p class="site-author-name" itemprop="name">缘起花渊</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
           
+            <p class="site-author-name" itemprop="name">缘起花渊</p>
+            <p class="site-description motion-element" itemprop="description"></p>
         </div>
+
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
+            
               <a href="/archives/">
-                <span class="site-state-item-count">23</span>
+            
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -705,7 +702,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -768,22 +765,25 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">缘起花渊</span>
+
+  
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
 
 
         
+
+
+
+
+
+
 
         
       </div>
@@ -849,25 +849,29 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 
@@ -894,10 +898,6 @@
   
 
 
-
-
-
-  
 
 
 
