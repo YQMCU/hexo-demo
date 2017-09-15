@@ -326,7 +326,7 @@
       
         
           
-            <h1 id="远程升级协议说明-源自-wiki-openluat-com"><a href="#远程升级协议说明-源自-wiki-openluat-com" class="headerlink" title="远程升级协议说明(源自[wiki.openluat.com])"></a>远程升级协议说明(源自[wiki.openluat.com])</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">远程升级协议说明</div><div class="line"></div><div class="line">用户根据此协议，自行开发服务器端</div><div class="line">终端的lua代码参考lib中的update.lua</div><div class="line">终端连接升级后台后</div><div class="line"></div><div class="line"></div><div class="line">第一步：</div><div class="line">终端-&gt;后台：</div><div class="line">    IMEI,项目标识,版本号</div><div class="line">    项目标识：由用户自己随意定义。</div><div class="line">    版本号：指的是模块内lua脚本当前的版本号。用户自行定义。</div><div class="line">    例如：862991234567890,SOCKET_SHORT_CONNECTION_FLYMODE,1.0.0</div><div class="line">后台-&gt;终端：</div><div class="line">    LUAUPDATE,id,cnt,last YYYY-MM-DD hh:mm:sec</div><div class="line">    id是项目标识的id,后台自己维护</div><div class="line">    cnt是包的个数，例如升级文件为10225字节，则cnt=(int)((10225+1021)/1022)=11;升级文件为10220字节，则cnt=(int)((10220+1021)/1022)=10</div><div class="line">    last是最后一个包的字节数，例如升级文件为10225字节，则last=10225%1022=5;升级文件为10220字节，则last=1022</div><div class="line">    YYYY-MM-DD hh:mm:sec 为年月日时分秒</div><div class="line">    例如如果id为18，升级文件为10225字节，则后台回复LUAUPDATE,18,11,5 2016-5-10 19:44:23</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">第二步：</div><div class="line">终端-&gt;后台：</div><div class="line">    Getidx,id</div><div class="line">    idx是包的索引，范围是1---cnt</div><div class="line">    id是后台维护的项目标识的id，跟第一步中后台-&gt;手表的id相同</div><div class="line">    例如：假设升级文件为10225字节，</div><div class="line">    Get1,18</div><div class="line">    Get2,18</div><div class="line">    Get3,18</div><div class="line">    Get4,18</div><div class="line">    Get5,18</div><div class="line">    Get6,18</div><div class="line">    Get7,18</div><div class="line">    Get8,18</div><div class="line">    Get9,18</div><div class="line">    Get10,18</div><div class="line">    Get11,18</div><div class="line">后台-&gt;终端：</div><div class="line">    每个包的内容，前2个字节为索引（NUMBER类型），剩余字节为文件包数据</div><div class="line">    最后一个包的长度为last+2，其余包的长度都为1024字节</div><div class="line">    例如：假设升级文件为10225字节，则</div><div class="line">    第1个包的内容为：第1、2个字节的ascii值为0x00，0x01，剩余1022字节的内容为升级文件的第1个1022字节内容</div><div class="line">    第2个包的内容为：第1、2个字节的ascii值为0x00，0x02，剩余1022字节的内容为升级文件的第2个1022字节内容</div><div class="line">    第3个包的内容为：第1、2个字节的ascii值为0x00，0x03，剩余1022字节的内容为升级文件的第3个1022字节内容</div><div class="line">    第4个包的内容为：第1、2个字节的ascii值为0x00，0x04，剩余1022字节的内容为升级文件的第4个1022字节内容</div><div class="line">    第5个包的内容为：第1、2个字节的ascii值为0x00，0x05，剩余1022字节的内容为升级文件的第5个1022字节内容</div><div class="line">    第6个包的内容为：第1、2个字节的ascii值为0x00，0x06，剩余1022字节的内容为升级文件的第6个1022字节内容</div><div class="line">    第7个包的内容为：第1、2个字节的ascii值为0x00，0x07，剩余1022字节的内容为升级文件的第7个1022字节内容</div><div class="line">    第8个包的内容为：第1、2个字节的ascii值为0x00，0x08，剩余1022字节的内容为升级文件的第8个1022字节内容</div><div class="line">    第9个包的内容为：第1、2个字节的ascii值为0x00，0x09，剩余1022字节的内容为升级文件的第9个1022字节内容</div><div class="line">    第10个包的内容为：第1、2个字节的ascii值为0x00，0x0A，剩余1022字节的内容为升级文件的第10个1022字节内容</div><div class="line">    第11个包的内容为：第1、2个字节的ascii值为0x00，0x0B，剩余5字节的内容为升级文件的最后5字节内容</div></pre></td></tr></table></figure>
+            <h1 id="远程升级协议说明-源自合宙"><a href="#远程升级协议说明-源自合宙" class="headerlink" title="远程升级协议说明(源自合宙)"></a>远程升级协议说明(源自<a href="http://wiki.openluat.com" target="_blank" rel="external">合宙</a>)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">远程升级协议说明</div><div class="line"></div><div class="line">用户根据此协议，自行开发服务器端</div><div class="line">终端的lua代码参考lib中的update.lua</div><div class="line">终端连接升级后台后</div><div class="line"></div><div class="line"></div><div class="line">第一步：</div><div class="line">终端-&gt;后台：</div><div class="line">    IMEI,项目标识,版本号</div><div class="line">    项目标识：由用户自己随意定义。</div><div class="line">    版本号：指的是模块内lua脚本当前的版本号。用户自行定义。</div><div class="line">    例如：862991234567890,SOCKET_SHORT_CONNECTION_FLYMODE,1.0.0</div><div class="line">后台-&gt;终端：</div><div class="line">    LUAUPDATE,id,cnt,last YYYY-MM-DD hh:mm:sec</div><div class="line">    id是项目标识的id,后台自己维护</div><div class="line">    cnt是包的个数，例如升级文件为10225字节，则cnt=(int)((10225+1021)/1022)=11;升级文件为10220字节，则cnt=(int)((10220+1021)/1022)=10</div><div class="line">    last是最后一个包的字节数，例如升级文件为10225字节，则last=10225%1022=5;升级文件为10220字节，则last=1022</div><div class="line">    YYYY-MM-DD hh:mm:sec 为年月日时分秒</div><div class="line">    例如如果id为18，升级文件为10225字节，则后台回复LUAUPDATE,18,11,5 2016-5-10 19:44:23</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">第二步：</div><div class="line">终端-&gt;后台：</div><div class="line">    Getidx,id</div><div class="line">    idx是包的索引，范围是1---cnt</div><div class="line">    id是后台维护的项目标识的id，跟第一步中后台-&gt;手表的id相同</div><div class="line">    例如：假设升级文件为10225字节，</div><div class="line">    Get1,18</div><div class="line">    Get2,18</div><div class="line">    Get3,18</div><div class="line">    Get4,18</div><div class="line">    Get5,18</div><div class="line">    Get6,18</div><div class="line">    Get7,18</div><div class="line">    Get8,18</div><div class="line">    Get9,18</div><div class="line">    Get10,18</div><div class="line">    Get11,18</div><div class="line">后台-&gt;终端：</div><div class="line">    每个包的内容，前2个字节为索引（NUMBER类型），剩余字节为文件包数据</div><div class="line">    最后一个包的长度为last+2，其余包的长度都为1024字节</div><div class="line">    例如：假设升级文件为10225字节，则</div><div class="line">    第1个包的内容为：第1、2个字节的ascii值为0x00，0x01，剩余1022字节的内容为升级文件的第1个1022字节内容</div><div class="line">    第2个包的内容为：第1、2个字节的ascii值为0x00，0x02，剩余1022字节的内容为升级文件的第2个1022字节内容</div><div class="line">    第3个包的内容为：第1、2个字节的ascii值为0x00，0x03，剩余1022字节的内容为升级文件的第3个1022字节内容</div><div class="line">    第4个包的内容为：第1、2个字节的ascii值为0x00，0x04，剩余1022字节的内容为升级文件的第4个1022字节内容</div><div class="line">    第5个包的内容为：第1、2个字节的ascii值为0x00，0x05，剩余1022字节的内容为升级文件的第5个1022字节内容</div><div class="line">    第6个包的内容为：第1、2个字节的ascii值为0x00，0x06，剩余1022字节的内容为升级文件的第6个1022字节内容</div><div class="line">    第7个包的内容为：第1、2个字节的ascii值为0x00，0x07，剩余1022字节的内容为升级文件的第7个1022字节内容</div><div class="line">    第8个包的内容为：第1、2个字节的ascii值为0x00，0x08，剩余1022字节的内容为升级文件的第8个1022字节内容</div><div class="line">    第9个包的内容为：第1、2个字节的ascii值为0x00，0x09，剩余1022字节的内容为升级文件的第9个1022字节内容</div><div class="line">    第10个包的内容为：第1、2个字节的ascii值为0x00，0x0A，剩余1022字节的内容为升级文件的第10个1022字节内容</div><div class="line">    第11个包的内容为：第1、2个字节的ascii值为0x00，0x0B，剩余5字节的内容为升级文件的最后5字节内容</div></pre></td></tr></table></figure>
 
           
         
@@ -1445,7 +1445,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/30/nodejs-tcp-net.html">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/30/nodejs_module_mysql.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="缘起花渊">
@@ -1464,7 +1464,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/30/nodejs-tcp-net.html" itemprop="url">node.js TCP编程 - net模块</a></h1>
+                <a class="post-title-link" href="/2017/06/30/nodejs_module_mysql.html" itemprop="url">node.js 第三方插件学习 - mysql</a></h1>
         
 
         <div class="post-meta">
@@ -1516,49 +1516,106 @@
       
         
           
-            <p>Node.js Net 模块提供了一些用于底层的网络通信的小工具，包含了创建服务器/客户端的方法，我们可以通过以下方式引入该模块：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>)</div></pre></td></tr></table></figure></p>
-<p>做node服务端编程，net基本是绕不开的一个模块。</p>
-<p>从组成来看，net模块主要包含两部分，了解socket编程的同学应该比较熟悉了：</p>
-<ul>
-<li>net.Server：TCP server，内部通过socket来实现与客户端的通信。</li>
-<li>net.Socket：tcp/本地 socket的node版实现，它实现了全双工的stream接口。</li>
-</ul>
-<h1 id="简单的C-S-client-server-Demo"><a href="#简单的C-S-client-server-Demo" class="headerlink" title="简单的C/S(client/server)Demo"></a>简单的C/S(client/server)Demo</h1><p>tcp服务端程序：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> PORT = <span class="number">3000</span>;</div><div class="line"><span class="keyword">var</span> HOST = <span class="string">'127.0.0.1'</span>;</div><div class="line"> </div><div class="line"><span class="comment">// tcp服务端</span></div><div class="line"><span class="keyword">var</span> server = net.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">socket</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'服务端：收到来自客户端的请求'</span>);</div><div class="line"> </div><div class="line">    socket.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'服务端：收到客户端数据，内容为&#123;'</span>+ data +<span class="string">'&#125;'</span>);</div><div class="line"> </div><div class="line">        <span class="comment">// 给客户端返回数据</span></div><div class="line">        socket.write(<span class="string">'你好，我是服务端'</span>);</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    socket.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">         <span class="built_in">console</span>.log(<span class="string">'服务端：客户端连接断开'</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line">server.listen(PORT, HOST, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'服务端：开始监听来自客户端的请求'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>tcp客户端</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> PORT = <span class="number">3000</span>;</div><div class="line"><span class="keyword">var</span> HOST = <span class="string">'127.0.0.1'</span>;</div><div class="line"> </div><div class="line"><span class="comment">// tcp客户端</span></div><div class="line"><span class="keyword">var</span> client = net.createConnection(PORT, HOST);</div><div class="line"> </div><div class="line">client.on(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端：已经与服务端建立连接'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">client.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端：收到服务端数据，内容为&#123;'</span>+ data +<span class="string">'&#125;'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">client.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端：连接断开'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">client.end(<span class="string">'你好，我是客户端'</span>);</div></pre></td></tr></table></figure>
-<p>服务端：<br>服务端：开始监听来自客户端的请求<br>服务端：收到来自客户端的请求<br>服务端：收到客户端数据，内容为{你好，我是客户端}<br>服务端：客户端连接断开</p>
-<p>客户端：<br>客户端：已经与服务端建立连接<br>客户端：收到服务端数据，内容为{你好，我是服务端}<br>客户端：连接断开</p>
-<p>事件 listening/connection/close/error</p>
-<p>listening：调用 server.listen()，正式开始监听请求的时候触发。</p>
-<p>connection：当有新的请求进来时触发，参数为请求相关的 socket。</p>
-<p>close：服务端关闭的时候触发。</p>
-<p>error：服务出错的时候触发，比如监听了已经被占用的端口。</p>
-<p>API、属性归类<br>以下对net.Socket的API跟属性，按照用途进行了大致的分类，方便读者更好的理解。大部分API跟属性都比较简单，看下文档就知道做什么的，这里就先不展开。</p>
-<p>连接相关</p>
-<p>socket.connect()：有3种不同的参数，用于不同的场景；</p>
-<p>socket.setTimeout()：用来进行连接超时设置。</p>
-<p>socket.setKeepAlive()：用来设置长连接。</p>
-<p>socket.destroy(）、socket.destroyed：当错误发生时，用来销毁socket，确保这个socket上不会再有其他的IO操作。</p>
-<p>数据读、写相关</p>
-<p>socket.write()、socket.end()、socket.pause()、socket.resume()、socket.setEncoding()、socket.setNoDelay()</p>
-<p>数据属性相关</p>
-<p>socket.bufferSize、socket.bytesRead、socket.bytesWritten</p>
-<p>事件循环相关</p>
-<p>socket.ref()、socket.unref()</p>
-<p>地址相关</p>
-<p>socket.address()</p>
-<p>socket.remoteAddress、socket.remoteFamily、socket.remotePort</p>
-<p>socket.localAddress/socket.localPort</p>
-<p>事件简介<br>data：当收到另一侧传来的数据时触发。</p>
-<p>connect：当连接建立时触发。</p>
-<p>close：连接断开时触发。如果是因为传输错误导致的连接断开，则参数为error。</p>
-<p>end：当连接另一侧发送了 FIN 包的时候触发（读者可以回顾下HTTP如何断开连接的）。默认情况下（allowHalfOpen == false），socket会完成自我销毁操作。但你也可以把 allowHalfOpen 设置为 true，这样就可以继续往socket里写数据。当然，最后你需要手动调用 socket.end()</p>
-<p>error：当有错误发生时，就会触发，参数为error。（官方文档基本一句话带过，不过考虑到出错的可能太多，也可以理解）</p>
-<p>timeout：提示用户，socket 已经超时，需要手动关闭连接。</p>
-<p>drain：当写缓存空了的时候触发。（不是很好描述，具体可以看下stream的介绍）</p>
-<p>lookup：域名解析完成时触发。</p>
-
+            <p>Node.js mysql模块对MySQL类型数据库进行操作</p>
+<h1 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install mysql</div></pre></td></tr></table></figure>
+<h1 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>);</div><div class="line"><span class="keyword">var</span> connection = mysql.createConnection(&#123;</div><div class="line">  host     : <span class="string">'localhost'</span>,</div><div class="line">  user     : <span class="string">'root'</span>,</div><div class="line">  password : <span class="string">'123456'</span>,</div><div class="line">  port: <span class="string">'3306'</span>,<span class="comment">//默认端口</span></div><div class="line">  database : <span class="string">'test'</span></div><div class="line">&#125;);</div><div class="line"><span class="comment">//连接数据库</span></div><div class="line">connection.connect();</div><div class="line"><span class="comment">//进行SQL查询</span></div><div class="line">connection.query(<span class="string">'SELECT 1 + 1 AS solution'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, results, fields</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'The solution is: '</span>, results[<span class="number">0</span>].solution);</div><div class="line">&#125;);</div><div class="line"><span class="comment">//关闭连接</span></div><div class="line">connection.end();</div></pre></td></tr></table></figure>
+<h1 id="数据库连接参数说明"><a href="#数据库连接参数说明" class="headerlink" title="数据库连接参数说明"></a>数据库连接参数说明</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">host</td>
+<td style="text-align:center">主机地址 （默认：localhost）</td>
+</tr>
+<tr>
+<td style="text-align:center">　　user</td>
+<td style="text-align:center">用户名</td>
+</tr>
+<tr>
+<td style="text-align:center">　　password</td>
+<td style="text-align:center">密码</td>
+</tr>
+<tr>
+<td style="text-align:center">　　port</td>
+<td style="text-align:center">端口号 （默认：3306）</td>
+</tr>
+<tr>
+<td style="text-align:center">　　database</td>
+<td style="text-align:center">数据库名</td>
+</tr>
+<tr>
+<td style="text-align:center">　　charset</td>
+<td style="text-align:center">连接字符集（默认：’UTF8_GENERAL_CI’，注意字符集的字母都要大写）</td>
+</tr>
+<tr>
+<td style="text-align:center">　　localAddress</td>
+<td style="text-align:center">此IP用于TCP连接（可选）</td>
+</tr>
+<tr>
+<td style="text-align:center">　　socketPath</td>
+<td style="text-align:center">连接到unix域路径，当使用 host 和 port 时会被忽略</td>
+</tr>
+<tr>
+<td style="text-align:center">　　timezone</td>
+<td style="text-align:center">时区（默认：’local’）</td>
+</tr>
+<tr>
+<td style="text-align:center">　　connectTimeout</td>
+<td style="text-align:center">连接超时（默认：不限制；单位：毫秒）</td>
+</tr>
+<tr>
+<td style="text-align:center">　　stringifyObjects</td>
+<td style="text-align:center">是否序列化对象</td>
+</tr>
+<tr>
+<td style="text-align:center">　　typeCast</td>
+<td style="text-align:center">是否将列值转化为本地JavaScript类型值 （默认：true）</td>
+</tr>
+<tr>
+<td style="text-align:center">　　queryFormat</td>
+<td style="text-align:center">自定义query语句格式化方法</td>
+</tr>
+<tr>
+<td style="text-align:center">　　supportBigNumbers</td>
+<td style="text-align:center">数据库支持bigint或decimal类型列时，需要设此option为true （默认：false）</td>
+</tr>
+<tr>
+<td style="text-align:center">　　bigNumberStrings</td>
+<td style="text-align:center">supportBigNumbers和bigNumberStrings启用</td>
+<td>强制bigint或decimal列以JavaScript字符串类型返回（默认：false）</td>
+</tr>
+<tr>
+<td style="text-align:center">　　dateStrings</td>
+<td style="text-align:center">强制timestamp,datetime,data类型以字符串类型返回，而不是JavaScript Date类型（默认：false）</td>
+</tr>
+<tr>
+<td style="text-align:center">　　debug</td>
+<td style="text-align:center">开启调试（默认：false）</td>
+</tr>
+<tr>
+<td style="text-align:center">　　multipleStatements</td>
+<td style="text-align:center">是否许一个query中有多个MySQL语句 （默认：false）</td>
+</tr>
+<tr>
+<td style="text-align:center">　　flags</td>
+<td style="text-align:center">用于修改连接标志</td>
+</tr>
+<tr>
+<td style="text-align:center">　　ssl</td>
+<td style="text-align:center">使用ssl参数（与crypto.createCredenitals参数格式一至）或一个包含ssl配置文件名称的字符串，目前只捆绑Amazon RDS的配置文件</td>
+</tr>
+</tbody>
+</table>
+<p>更多说明可参见：<a href="https://github.com/mysqljs/mysql" target="_blank" rel="external">https://github.com/mysqljs/mysql</a></p>
+<h1 id="数据库增删改查操作CURD"><a href="#数据库增删改查操作CURD" class="headerlink" title="数据库增删改查操作CURD"></a>数据库增删改查操作CURD</h1><h2 id="C-create-增"><a href="#C-create-增" class="headerlink" title="C:create 增"></a>C:create 增</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span>  addSql = <span class="string">'INSERT INTO websites(Id,name,url,alexa,country) VALUES(0,?,?,?,?)'</span>;</div><div class="line"><span class="keyword">var</span>  addSqlParams = [<span class="string">'菜鸟工具'</span>, <span class="string">'https://c.runoob.com'</span>,<span class="string">'23453'</span>, <span class="string">'CN'</span>];</div><div class="line"><span class="comment">//增</span></div><div class="line">connection.query(addSql,addSqlParams,<span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(err)&#123;</div><div class="line">         <span class="built_in">console</span>.log(<span class="string">'[INSERT ERROR] - '</span>,err.message);</div><div class="line">         <span class="keyword">return</span>;</div><div class="line">        &#125;        </div><div class="line"> </div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'--------------------------INSERT----------------------------'</span>);</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'INSERT ID:'</span>,result);        </div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'-----------------------------------------------------------------\n\n'</span>);  </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="U-update-改"><a href="#U-update-改" class="headerlink" title="U:update 改"></a>U:update 改</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> modSql = <span class="string">'UPDATE websites SET name = ?,url = ? WHERE Id = ?'</span>;</div><div class="line"><span class="keyword">var</span> modSqlParams = [<span class="string">'菜鸟移动站'</span>, <span class="string">'https://m.runoob.com'</span>,<span class="number">6</span>];</div><div class="line"><span class="comment">//改</span></div><div class="line">connection.query(modSql,modSqlParams,<span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</div><div class="line">   <span class="keyword">if</span>(err)&#123;</div><div class="line">         <span class="built_in">console</span>.log(<span class="string">'[UPDATE ERROR] - '</span>,err.message);</div><div class="line">         <span class="keyword">return</span>;</div><div class="line">   &#125;        </div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'--------------------------UPDATE----------------------------'</span>);</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'UPDATE affectedRows'</span>,result.affectedRows);</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'-----------------------------------------------------------------\n\n'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="U-read-查"><a href="#U-read-查" class="headerlink" title="U:read 查"></a>U:read 查</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span>  sql = <span class="string">'SELECT * FROM websites'</span>;</div><div class="line"><span class="comment">//查</span></div><div class="line">connection.query(sql,<span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(err)&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">'[SELECT ERROR] - '</span>,err.message);</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'--------------------------SELECT----------------------------'</span>);</div><div class="line">       <span class="built_in">console</span>.log(result);</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'------------------------------------------------------------\n\n'</span>);  </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="U-read-查-1"><a href="#U-read-查-1" class="headerlink" title="U:read 查"></a>U:read 查</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span>  sql = <span class="string">'SELECT * FROM websites'</span>;</div><div class="line"><span class="comment">//查</span></div><div class="line">connection.query(sql,<span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(err)&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">'[SELECT ERROR] - '</span>,err.message);</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'--------------------------SELECT----------------------------'</span>);</div><div class="line">       <span class="built_in">console</span>.log(result);</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'------------------------------------------------------------\n\n'</span>);  </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="U-delete-删"><a href="#U-delete-删" class="headerlink" title="U:delete 删"></a>U:delete 删</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mysql  = <span class="built_in">require</span>(<span class="string">'mysql'</span>);  </div><div class="line"> </div><div class="line"><span class="keyword">var</span> connection = mysql.createConnection(&#123;     </div><div class="line">  host     : <span class="string">'localhost'</span>,       </div><div class="line">  user     : <span class="string">'root'</span>,              </div><div class="line">  password : <span class="string">'123456'</span>,       </div><div class="line">  port: <span class="string">'3306'</span>,                   </div><div class="line">  database: <span class="string">'test'</span>, </div><div class="line">&#125;); </div><div class="line"> </div><div class="line">connection.connect();</div><div class="line"> </div><div class="line"><span class="keyword">var</span> delSql = <span class="string">'DELETE FROM websites where id=6'</span>;</div><div class="line"><span class="comment">//删</span></div><div class="line">connection.query(delSql,<span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(err)&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">'[DELETE ERROR] - '</span>,err.message);</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">        &#125;        </div><div class="line"> </div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'--------------------------DELETE----------------------------'</span>);</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'DELETE affectedRows'</span>,result.affectedRows);</div><div class="line">       <span class="built_in">console</span>.log(<span class="string">'-----------------------------------------------------------------\n\n'</span>);  </div><div class="line">&#125;);</div><div class="line"> </div><div class="line">connection.end();</div></pre></td></tr></table></figure>
           
         
       
