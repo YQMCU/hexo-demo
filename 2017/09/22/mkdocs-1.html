@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="YQMCU&#39;s Blog">
 <meta property="og:description" content="概述MKDocs是一个项目文档生成器。 可以部署在Github Page供人浏览。 MkDocs可以应用一系列主题，譬如mkdocs,readthedocs,第三方主题，譬如Mkdocs wiki，或者创建自己的主题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-22T03:32:08.700Z">
+<meta property="og:updated_time" content="2017-09-22T03:47:51.938Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MKDocs 初探">
 <meta name="twitter:description" content="概述MKDocs是一个项目文档生成器。 可以部署在Github Page供人浏览。 MkDocs可以应用一系列主题，譬如mkdocs,readthedocs,第三方主题，譬如Mkdocs wiki，或者创建自己的主题。">
@@ -336,6 +336,20 @@
 <h2 id="安装MkDocs"><a href="#安装MkDocs" class="headerlink" title="安装MkDocs"></a>安装MkDocs</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install mkdocs</div></pre></td></tr></table></figure>
 <p>若安装完成，可以用<code>mkdocs --version</code> 查看版本</p>
 <h1 id="启用"><a href="#启用" class="headerlink" title="启用"></a>启用</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ mkdocs new project_name</div><div class="line">INFO    -  Creating project directory: project_name</div><div class="line">INFO    -  Writing config file: project_name\mkdocs.yml</div><div class="line">INFO    -  Writing initial docs: project_name\docs\index.md</div><div class="line">$ cd project_name</div></pre></td></tr></table></figure>
+<h1 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h1><pre><code>mkdocs.yml      # 配置文件
+docs/
+    index.md    # 文档首页
+    ...         # 其他页面，图片或者其他文件
+</code></pre><h1 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h1><p><code>MKDocs</code>自带服务器预览功能，需要使用<code>mkdocs serve</code>指令</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ mkdcos serve</div><div class="line">INFO    -  Building documentation...</div><div class="line">INFO    -  Cleaning site directory</div><div class="line">[I <span class="number">170922</span> <span class="number">11</span>:<span class="number">37</span>:<span class="number">17</span> server:<span class="number">283</span>] Serving on http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8000</span></div><div class="line">[I <span class="number">170922</span> <span class="number">11</span>:<span class="number">37</span>:<span class="number">17</span> handlers:<span class="number">60</span>] Start watching changes</div><div class="line">[I <span class="number">170922</span> <span class="number">11</span>:<span class="number">37</span>:<span class="number">17</span> handlers:<span class="number">62</span>] Start detecting changes</div></pre></td></tr></table></figure>
+<p>打开浏览器，在地址栏输入<code>http://127.0.0.1:8000</code>，即可查看当前项目页面。</p>
+<h1 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h1><ul>
+<li><code>mkdocs new [dir-name]</code> - 创建一个项目</li>
+<li><code>mkdocs serve</code> - 启动本地服务器.</li>
+<li><code>mkdocs build</code> - 创建文档站点.</li>
+<li><code>mkdocs help</code> - 查看帮助.</li>
+</ul>
+
       
     </div>
     
@@ -499,7 +513,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需要环境"><span class="nav-number">2.1.</span> <span class="nav-text">需要环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装MkDocs"><span class="nav-number">2.2.</span> <span class="nav-text">安装MkDocs</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启用"><span class="nav-number">3.</span> <span class="nav-text">启用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需要环境"><span class="nav-number">2.1.</span> <span class="nav-text">需要环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装MkDocs"><span class="nav-number">2.2.</span> <span class="nav-text">安装MkDocs</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启用"><span class="nav-number">3.</span> <span class="nav-text">启用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目结构"><span class="nav-number">4.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本地预览"><span class="nav-number">5.</span> <span class="nav-text">本地预览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本命令"><span class="nav-number">6.</span> <span class="nav-text">基本命令</span></a></li></ol></div>
             
 
           </div>
